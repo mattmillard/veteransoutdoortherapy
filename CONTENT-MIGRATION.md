@@ -12,7 +12,7 @@ Source audited August 6, 2026: `https://veteransoutdoortherapy.org`
 
 ## URL handling
 
-Legacy routes are mapped in `next.config.ts`. Utility pages such as WooCommerce account and checkout are replaced by native application routes. The unfinished `banquet-2026` Divi demo content is intentionally redirected to the real Wilderness to Wellness event.
+All 24 page-sitemap paths resolve as first-class application routes, including the original application, sponsorship, donation, event, account, checkout, contact, service, and product archive URLs. The unfinished `banquet-2026` Divi demo path renders the real Wilderness to Wellness experience. Only the archival author and uncategorized archive URLs redirect to relevant current content.
 
 ## Media hosting
 

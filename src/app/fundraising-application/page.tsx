@@ -1,0 +1,2 @@
+import { ApplicationFormPage } from "@/components/application-form-page";
+export default function FundraisingApplicationPage() { return <ApplicationFormPage eyebrow="Volunteer, host, or fundraiser" title="Help create the next adventure." copy="Tell us how you would like to contribute your time, location, experience, or fundraising support." type="volunteer-fundraiser-host" />; }

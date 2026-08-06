@@ -1,2 +1,2 @@
-import { IntakeForm } from "@/components/intake-form";
-export default function ApplyPage() { return <><section className="page-hero"><div className="container"><p className="eyebrow">Your next chapter can start outside</p><h1 className="display">Raise your hand.<br />We&apos;ll handle the rest.</h1><p>Apply as a Veteran, Gold Star family member, volunteer, fundraiser, or host. Our team reviews every request personally.</p></div></section><section className="section"><div className="container form-layout"><div><p className="eyebrow">Start here</p><h2 className="display section-title">Tell us about you.</h2><p>There is no cost to participate in selected programs. Information is used only to evaluate and coordinate your request.</p></div><IntakeForm /></div></section></>; }
+import { ApplicationHub } from "@/components/application-hub";
+export default function ApplyPage() { return <ApplicationHub />; }
