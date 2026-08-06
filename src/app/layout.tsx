@@ -20,6 +20,13 @@ export const metadata: Metadata = {
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://veteransoutdoortherapy.org"),
   title: { default: "Veterans Outdoor Therapy", template: "%s | Veterans Outdoor Therapy" },
   description: "Fully funded outdoor adventures for Veterans, Gold Star families, and children.",
+  icons: {
+    icon: [
+      { url: "/vot-icon-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/vot-icon-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
