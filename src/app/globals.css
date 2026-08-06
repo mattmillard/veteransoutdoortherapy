@@ -62,6 +62,15 @@ img { max-width: 100%; }
 .mission-grid { display: grid; grid-template-columns: .6fr 1.3fr 1.4fr; align-items: start; gap: 50px; }
 .mission-grid h2 { margin: 0; font-size: clamp(2.5rem, 5vw, 4.7rem); }
 .mission-grid .eyebrow { color: #ef9b70; }
+.healing-section { background: #e4e6df; }
+.healing-grid { display: grid; grid-template-columns: minmax(0, 1.15fr) minmax(320px, .85fr); align-items: center; gap: clamp(36px, 6vw, 88px); }
+.healing-video { position: relative; overflow: hidden; aspect-ratio: 16 / 9; background: var(--ink); }
+.healing-video iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.healing-grid .section-title { margin-bottom: 24px; }
+.contribution { background: #d4d9ce; padding: clamp(70px, 9vw, 120px) 0; }
+.contribution-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: clamp(35px, 7vw, 100px); }
+.contribution-grid > div:last-child > p { font-size: 1.08rem; line-height: 1.8; }
+.contribution-grid .hero-actions { align-items: center; margin-top: 30px; }
 .event-strip, .product-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
 .event-card { min-height: 470px; position: relative; overflow: hidden; background: var(--ink); color: #fff; }
 .event-card img { object-fit: cover; transition: transform .5s; }
@@ -168,6 +177,22 @@ img { max-width: 100%; }
 .sponsor-grid h2 { margin: 0 0 12px; font-size: 3.5rem; }
 .sponsor-grid span { display: flex; gap: 8px; align-items: center; }
 .sponsor-grid .button { margin-top: auto; }
+.sponsor-logos { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.sponsor-logos figure { position: relative; min-height: 180px; margin: 0; border: 1px solid var(--line); background: #fff; }
+.sponsor-logos img { object-fit: contain; padding: 24px; }
+.sponsor-events-section { background: #e4e6df; }
+.sponsor-events { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.sponsor-events article { background: var(--white); padding: 0 24px 28px; }
+.sponsor-event-image { position: relative; overflow: hidden; aspect-ratio: 4 / 3; margin: 0 -24px 24px; }
+.sponsor-event-image img { object-fit: cover; }
+.sponsor-events article > span { color: var(--orange); font: 700 1rem var(--font-display); text-transform: uppercase; }
+.sponsor-events h3 { margin: 7px 0 10px; font-size: 2.4rem; }
+.sponsor-events p { min-height: 72px; }
+.event-detail-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.event-detail-grid article { border-top: 4px solid var(--orange); background: var(--white); padding: 30px; }
+.event-detail-grid h2 { margin: 28px 0 14px; font-size: 2.6rem; }
+.event-detail-grid li { margin-bottom: 10px; }
+.story-copy { max-width: 900px; }
 .admin-login { min-height: 680px; display: grid; place-items: center; padding: 40px 20px; background: #dfe2d9; }
 .admin-login form { width: min(440px, 100%); display: grid; gap: 16px; background: var(--white); border: 1px solid var(--line); padding: 38px; }
 .admin-login h1 { margin: 0 0 10px; font-size: 3rem; }
@@ -207,5 +232,5 @@ img { max-width: 100%; }
 .account-actions svg { grid-row: 1 / 3; color: var(--orange); }
 .account-actions span { color: var(--moss); font-size: .82rem; }
 @media (max-width: 850px) { .form-layout, .checkout-grid, .admin-grid { grid-template-columns: 1fr; } .sponsor-grid { grid-template-columns: 1fr; } }
-@media (max-width: 900px) { .giving-band > .container, .sponsor-proof > .container, .application-note > .container { grid-template-columns: 1fr; } .application-grid, .donation-impact { grid-template-columns: 1fr; } .program-grid, .account-actions { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 560px) { .form-row, .program-grid, .account-actions { grid-template-columns: 1fr; } .cart-items article { grid-template-columns: 70px 1fr 30px; } .cart-items article > b { grid-column: 2; } .cart-items article > button { grid-column: 3; grid-row: 1; } .admin-page header { align-items: flex-start; flex-direction: column; gap: 15px; } }
+@media (max-width: 900px) { .giving-band > .container, .sponsor-proof > .container, .application-note > .container, .healing-grid, .contribution-grid { grid-template-columns: 1fr; } .application-grid, .donation-impact, .event-detail-grid { grid-template-columns: 1fr; } .program-grid, .account-actions, .sponsor-logos { grid-template-columns: repeat(2, 1fr); } .sponsor-events { grid-template-columns: 1fr; } .sponsor-events p { min-height: 0; } }
+@media (max-width: 560px) { .form-row, .program-grid, .account-actions { grid-template-columns: 1fr; } .sponsor-logos figure { min-height: 130px; } .cart-items article { grid-template-columns: 70px 1fr 30px; } .cart-items article > b { grid-column: 2; } .cart-items article > button { grid-column: 3; grid-row: 1; } .admin-page header { align-items: flex-start; flex-direction: column; gap: 15px; } }

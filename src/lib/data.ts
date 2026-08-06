@@ -119,7 +119,7 @@ export const products: Product[] = [
   },
   ...[
     ["custom-sponsor", "Custom Sponsor", 100],
-    ["bronze-sponsor", "Bronze Sponsor", 2000],
+    ["bronze-sponsor", "Bronze Sponsor", 1000],
     ["silver-sponsor", "Silver Sponsor", 3000],
     ["gold-sponsor", "Gold Sponsor", 5000],
   ].map(([slug, name, price]) => ({
@@ -141,6 +141,10 @@ export const events = [
   { title: "Coulter Lake Guest Ranch", date: "July 8 - July 12", image: `${uploads}/2026/01/horseback.jpg`, type: "Female horseback camp" },
   { title: "Rocky Point Recreational Park", date: "September 16 - September 20", image: `${uploads}/2025/09/552626219_122157680714799810_368606548123490962_n-980x735.jpg`, type: "Archery antelope hunt" },
 ];
+
+export const healingPowerCopy = "Engaging in activities such as hiking, horseback riding, fishing, and hunting offers a refreshing escape from daily life while creating opportunities for reflection and bonding with fellow veterans who understand similar experiences and challenges. These adventures can significantly alleviate stress and contribute to the mental well-being of our Soldiers and Gold Star family members. We LOVE the outdoors, have witnessed its healing power, and are thrilled to share our passion with others!";
+
+export const contributionCopy = "Not everyone can sponsor at the Gold, Silver, or Bronze level — and that’s okay. Every donation, big or small, helps us give Veterans a chance to heal through the peace of the outdoors. Whether your gift helps provide a warm meal on a hunt, fuel for a fishing trip, or gear for an adventure, you’re directly impacting the lives of those who’ve served our nation. Join us in showing our Veterans that they are never alone on their journey to healing.";
 
 const galleryFiles = `
 2025/09/481919614_10235564637753446_8095133793450501592_n.jpg

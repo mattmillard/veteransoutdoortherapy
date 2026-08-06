@@ -2,7 +2,7 @@ import { neon } from "@neondatabase/serverless";
 import { products as seedProducts, type Product } from "./data";
 
 function sql() { return process.env.DATABASE_URL ? neon(process.env.DATABASE_URL) : null; }
-async function ensureProducts() { const db = sql(); if (!db) return null; await db`CREATE TABLE IF NOT EXISTS products (slug text PRIMARY KEY, name text NOT NULL, short_name text NOT NULL, price numeric NOT NULL, category text NOT NULL, description text NOT NULL, image text NOT NULL, gallery jsonb NOT NULL DEFAULT '[]', sizes jsonb, stock integer, featured boolean NOT NULL DEFAULT false, updated_at timestamptz NOT NULL DEFAULT now())`; return db; }
+async function ensureProducts() { const db = sql(); if (!db) return null; await db`CREATE TABLE IF NOT EXISTS products (slug text PRIMARY KEY, name text NOT NULL, short_name text NOT NULL, price numeric NOT NULL, category text NOT NULL, description text NOT NULL, image text NOT NULL, gallery jsonb NOT NULL DEFAULT '[]', sizes jsonb, stock integer, featured boolean NOT NULL DEFAULT false, updated_at timestamptz NOT NULL DEFAULT now())`; await db`CREATE TABLE IF NOT EXISTS migrations (id text PRIMARY KEY, applied_at timestamptz NOT NULL DEFAULT now())`; const migration = await db`INSERT INTO migrations (id) VALUES ('bronze-price-1000') ON CONFLICT (id) DO NOTHING RETURNING id`; if (migration.length) await db`UPDATE products SET price = 1000, updated_at = now() WHERE slug = 'bronze-sponsor' AND price = 2000`; return db; }
 
 export async function getProducts(): Promise<Product[]> {
   const db = await ensureProducts(); if (!db) return seedProducts;
