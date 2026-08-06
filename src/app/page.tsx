@@ -2,10 +2,11 @@ import { ArrowRight, Compass, HeartHandshake, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ProductCard } from "@/components/product-card";
-import { events, mission, products } from "@/lib/data";
+import { events, mission } from "@/lib/data";
+import { getProducts } from "@/lib/db";
 
-export default function Home() {
-  const merchandise = products.filter((item) => item.category === "Merchandise" && item.featured);
+export default async function Home() {
+  const merchandise = (await getProducts()).filter((item) => item.category === "Merchandise" && item.featured);
   return <>
     <section className="hero"><Image src="https://veteransoutdoortherapy.org/wp-content/uploads/2025/09/552626219_122157680714799810_368606548123490962_n-980x735.jpg" alt="Veterans sharing an outdoor adventure" fill priority sizes="100vw" /><div className="hero-shade" /><div className="container hero-content"><p className="eyebrow">Honor through action</p><h1 className="display">Open country.<br />Stronger bonds.</h1><p>Fully funded outdoor adventures where Veterans and Gold Star families can reconnect, recover, and feel the strength of community.</p><div className="hero-actions"><Link className="button orange" href="/apply">Find your adventure <ArrowRight size={18} /></Link><Link className="button hero-secondary" href="/donate">Fund a trip</Link></div></div></section>
     <section className="mission-band"><div className="container mission-grid"><p className="eyebrow">Our mission</p><h2 className="display">Service deserves more than thanks.</h2><p>{mission}</p></div></section>
