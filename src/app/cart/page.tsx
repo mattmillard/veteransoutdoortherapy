@@ -1,0 +1,2 @@
+import { Checkout } from "@/components/checkout";
+export default function CartPage() { return <section className="section"><div className="container"><p className="eyebrow">Secure checkout</p><h1 className="display section-title">Your cart.</h1><Checkout /></div></section>; }

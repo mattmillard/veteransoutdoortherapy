@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function PokerRunPage() { return <section className="page-hero"><div className="container"><p className="eyebrow">2nd Annual · June 20, 2026</p><h1 className="display">Ride with<br />purpose.</h1><p>Start and finish at Head&apos;s Blacktop Harley-Davidson in Columbia. Registration opens at 8:30 AM and kickstands go up at 9:30 AM. Entry is $25 for one hand or $100 for five.</p><Link className="button orange" href="/contact">Join the run</Link></div></section>; }

@@ -1,0 +1,3 @@
+import type { MetadataRoute } from "next";
+import { products } from "@/lib/data";
+export default function sitemap(): MetadataRoute.Sitemap { const base = process.env.NEXT_PUBLIC_SITE_URL || "https://veteransoutdoortherapy.org"; const routes = ["", "/about", "/adventures", "/apply", "/contact", "/donate", "/gallery", "/shop", "/sponsor", "/team", "/wilderness-to-wellness", "/poker-run-2026", "/2026-gun-raffle"]; return [...routes.map((route) => ({ url: `${base}${route}`, changeFrequency: route === "/shop" ? "weekly" as const : "monthly" as const, priority: route === "" ? 1 : .7 })), ...products.map((product) => ({ url: `${base}/product/${product.slug}`, changeFrequency: "weekly" as const, priority: .6 }))]; }

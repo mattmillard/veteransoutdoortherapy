@@ -1,69 +1,17 @@
+import { ArrowRight, Compass, HeartHandshake, ShieldCheck } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
+import { ProductCard } from "@/components/product-card";
+import { events, mission, products } from "@/lib/data";
 
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+  const merchandise = products.filter((item) => item.category === "Merchandise" && item.featured);
+  return <>
+    <section className="hero"><Image src="https://veteransoutdoortherapy.org/wp-content/uploads/2025/09/552626219_122157680714799810_368606548123490962_n-980x735.jpg" alt="Veterans sharing an outdoor adventure" fill priority sizes="100vw" /><div className="hero-shade" /><div className="container hero-content"><p className="eyebrow">Honor through action</p><h1 className="display">Open country.<br />Stronger bonds.</h1><p>Fully funded outdoor adventures where Veterans and Gold Star families can reconnect, recover, and feel the strength of community.</p><div className="hero-actions"><Link className="button orange" href="/apply">Find your adventure <ArrowRight size={18} /></Link><Link className="button hero-secondary" href="/donate">Fund a trip</Link></div></div></section>
+    <section className="mission-band"><div className="container mission-grid"><p className="eyebrow">Our mission</p><h2 className="display">Service deserves more than thanks.</h2><p>{mission}</p></div></section>
+    <section className="section"><div className="container"><p className="eyebrow">In the field</p><h2 className="display section-title">The next trail starts here.</h2><div className="event-strip">{events.slice(0, 3).map((event, index) => <article className="event-card" key={event.title}><Image src={event.image} alt="" fill sizes="(max-width: 700px) 100vw, 33vw" /><div className="event-number">0{index + 1}</div><div className="event-copy"><span>{event.date}</span><h3 className="display">{event.title}</h3><p>{event.type}</p></div></article>)}</div><Link className="text-link" href="/adventures">View all adventures <ArrowRight size={17} /></Link></div></section>
+    <section className="impact"><div className="container impact-grid"><div><p className="eyebrow">Why outdoors</p><h2 className="display section-title">A different kind of support.</h2></div><div className="impact-points"><div><Compass /><h3>Shared direction</h3><p>Purposeful days outside create room to reset and move forward.</p></div><div><HeartHandshake /><h3>Real camaraderie</h3><p>Connect with people who understand the road you have traveled.</p></div><div><ShieldCheck /><h3>Fully funded</h3><p>Travel, meals, gear, and activities are covered for participants.</p></div></div></div></section>
+    <section className="section"><div className="container"><p className="eyebrow">Mission gear</p><h2 className="display section-title">Wear your support.</h2><div className="product-grid">{merchandise.map((product) => <ProductCard key={product.slug} product={product} />)}</div></div></section>
+    <section className="quote"><div className="container"><span>“</span><blockquote>This event meant the world to me. It gave me hope again and made me realize that I am not alone.</blockquote><p>Derek · Army Purple Heart Recipient</p></div></section>
+  </>;
 }

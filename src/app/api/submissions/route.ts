@@ -1,0 +1,3 @@
+import { NextResponse } from "next/server";
+import { saveSubmission } from "@/lib/db";
+export async function POST(request: Request) { try { const form = await request.formData(); const kind = String(form.get("kind") || "application").slice(0, 60); const data = Object.fromEntries([...form.entries()].filter(([key, value]) => key !== "kind" && typeof value === "string").map(([key, value]) => [key, String(value).slice(0, 5000)])); await saveSubmission(kind, data); return NextResponse.json({ ok: true }); } catch { return NextResponse.json({ error: "Submission storage is not configured" }, { status: 503 }); } }

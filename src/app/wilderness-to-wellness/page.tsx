@@ -1,0 +1,2 @@
+import Link from "next/link";
+export default function WellnessPage() { return <section className="page-hero"><div className="container"><p className="eyebrow">Wilderness to Wellness</p><h1 className="display">Honor the past.<br />Heal in the present.</h1><p>An evening celebrating nature, community, service, and resilience. The 2026 event is sold out.</p><Link className="button orange" href="/contact">Ask about the next event</Link></div></section>; }
