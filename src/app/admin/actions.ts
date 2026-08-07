@@ -23,6 +23,16 @@ function slugify(value: string) {
 		.replace(/(^-|-$)/g, "");
 }
 
+function normalizeCategory(value: string) {
+	const cleaned = value
+		.trim()
+		.replace(/\s+/g, " ");
+	if (!cleaned) return "Merchandise";
+	if (cleaned.toLowerCase() === "sponsorships") return "Sponsorships";
+	if (cleaned.toLowerCase() === "merchandise") return "Merchandise";
+	return cleaned;
+}
+
 function safeUploadPath(slug: string, fileName: string) {
 	const safeSlug = slugify(slug).slice(0, 60) || "product";
 	const safeName = fileName
@@ -74,7 +84,7 @@ export async function saveProductAction(form: FormData) {
 			name,
 			shortName: String(form.get("shortName") || name),
 			price: Number(form.get("price")),
-			category: String(form.get("category")) === "Sponsorships" ? "Sponsorships" : "Merchandise",
+			category: normalizeCategory(String(form.get("category") || "")),
 			description: String(form.get("description") || ""),
 			image,
 			gallery: image ? [image] : [],
