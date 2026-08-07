@@ -780,6 +780,26 @@ img {
 	gap: 10px;
 	margin: 28px 0;
 }
+.add-to-cart-actions {
+	display: grid;
+	align-items: start;
+	gap: 8px;
+}
+.add-button.added {
+	background: #1f7a3e;
+	border-color: #1f7a3e;
+}
+.cart-feedback {
+	min-height: 1.2em;
+	margin: 0;
+	color: #2f5f3a;
+	font-size: 0.86rem;
+	font-weight: 700;
+}
+.cart-link-inline {
+	margin-top: 0;
+	font-size: 0.86rem;
+}
 .buy-box label {
 	font-size: 0.82rem;
 	font-weight: 700;
@@ -858,6 +878,9 @@ img {
 	.buy-box {
 		align-items: stretch;
 		flex-direction: column;
+	}
+	.add-to-cart-actions {
+		width: 100%;
 	}
 }
 .form-layout {
