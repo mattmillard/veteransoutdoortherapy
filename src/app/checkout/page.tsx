@@ -1,2 +1,12 @@
 import { Checkout } from "@/components/checkout";
-export default function CheckoutPage() { return <section className="section"><div className="container"><p className="eyebrow">Complete your order</p><h1 className="display section-title">Secure checkout.</h1><Checkout /></div></section>; }
+export default function CheckoutPage() {
+	return (
+		<section className="section">
+			<div className="container">
+				<p className="eyebrow">Complete your order</p>
+				<h1 className="display section-title">Secure checkout.</h1>
+				<Checkout />
+			</div>
+		</section>
+	);
+}
