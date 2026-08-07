@@ -361,11 +361,11 @@ img {
 	display: flex;
 	align-items: flex-end;
 	overflow: hidden;
+	background-image: url("/quote-bg.jpg");
+	background-position: center 35%;
+	background-size: cover;
+	background-attachment: fixed;
 	color: #fff;
-}
-.hero > img {
-	object-fit: cover;
-	object-position: center 35%;
 }
 .hero-shade {
 	position: absolute;
@@ -634,11 +634,17 @@ img {
 	}
 }
 @media (max-width: 1024px) {
+	.hero {
+		background-attachment: scroll;
+	}
 	.quote {
 		background-attachment: scroll;
 	}
 }
 @media (prefers-reduced-motion: reduce) {
+	.hero {
+		background-attachment: scroll;
+	}
 	.quote {
 		background-attachment: scroll;
 	}

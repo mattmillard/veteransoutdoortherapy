@@ -10,13 +10,6 @@ export default async function Home() {
 	return (
 		<>
 			<section className="hero">
-				<Image
-					src="/quote-bg.jpg"
-					alt="Veterans sharing an outdoor adventure"
-					fill
-					priority
-					sizes="100vw"
-				/>
 				<div className="hero-shade" />
 				<div className="container hero-content">
 					<p className="eyebrow">Honoring Our Nation&apos;s Heroes</p>
