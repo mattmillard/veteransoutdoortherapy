@@ -5,6 +5,34 @@ import { redirect } from "next/navigation";
 import { isAdmin, login, logout } from "@/lib/auth";
 import { deleteProduct, getProducts, saveProduct } from "@/lib/db";
 
+function revalidateCatalogPages(slug: string) {
+	revalidatePath("/");
+	revalidatePath("/shop");
+	revalidatePath("/products");
+	revalidatePath("/product-category/merchandise");
+	revalidatePath("/sponsor");
+	revalidatePath("/product-category/sponsorships");
+	revalidatePath(`/product/${slug}`);
+	revalidatePath("/admin");
+}
+
+function slugify(value: string) {
+	return value
+		.toLowerCase()
+		.replace(/[^a-z0-9]+/g, "-")
+		.replace(/(^-|-$)/g, "");
+}
+
+function safeUploadPath(slug: string, fileName: string) {
+	const safeSlug = slugify(slug).slice(0, 60) || "product";
+	const safeName = fileName
+		.toLowerCase()
+		.replace(/[^a-z0-9._-]+/g, "-")
+		.replace(/-+/g, "-")
+		.slice(-80) || "image";
+	return `products/${safeSlug}/${Date.now()}-${safeName}`;
+}
+
 export async function loginAction(form: FormData) {
 	const valid = await login(String(form.get("username") || ""), String(form.get("password") || ""));
 	if (!valid) redirect("/admin?error=1");
@@ -30,8 +58,13 @@ export async function saveProductAction(form: FormData) {
 	if (file instanceof File && file.size > 0) {
 		if (!process.env.BLOB_READ_WRITE_TOKEN) redirect("/admin?saveError=upload-config");
 		try {
-			image = (await put(`products/${slug}-${file.name}`, file, { access: "public", addRandomSuffix: true })).url;
-		} catch {
+			image = (await put(safeUploadPath(slug, file.name), file, { access: "public", addRandomSuffix: true })).url;
+		} catch (error) {
+			console.error("Product image upload failed", {
+				slug,
+				fileName: file.name,
+				error,
+			});
 			redirect("/admin?saveError=upload-failed");
 		}
 	}
@@ -52,19 +85,16 @@ export async function saveProductAction(form: FormData) {
 			stock: form.get("stock") ? Number(form.get("stock")) : undefined,
 			featured: form.get("featured") === "on",
 		});
-	} catch {
+	} catch (error) {
+		console.error("Product save failed", { slug, error });
 		redirect("/admin?saveError=save-failed");
 	}
-	revalidatePath("/");
-	revalidatePath("/shop");
-	revalidatePath("/sponsor");
-	revalidatePath(`/product/${slug}`);
-	revalidatePath("/admin");
+	revalidateCatalogPages(slug);
 	redirect("/admin?saved=1");
 }
 
 function getDuplicateSlug(existingSlugs: Set<string>, sourceSlug: string) {
-	const base = `${sourceSlug}-copy`;
+	const base = `${slugify(sourceSlug).slice(0, 48) || "product"}-copy`;
 	if (!existingSlugs.has(base)) return base;
 	let index = 2;
 	while (existingSlugs.has(`${base}-${index}`)) index += 1;
@@ -94,20 +124,12 @@ export async function duplicateProductAction(form: FormData) {
 		redirect("/admin?saveError=save-failed");
 	}
 
-	revalidatePath("/");
-	revalidatePath("/shop");
-	revalidatePath("/sponsor");
-	revalidatePath(`/product/${duplicateSlug}`);
-	revalidatePath("/admin");
+	revalidateCatalogPages(duplicateSlug);
 	redirect(`/admin?edit=${duplicateSlug}&saved=1`);
 }
 export async function deleteProductAction(form: FormData) {
 	if (!(await isAdmin())) redirect("/admin");
 	const slug = String(form.get("slug") || "");
 	await deleteProduct(slug);
-	revalidatePath("/");
-	revalidatePath("/shop");
-	revalidatePath("/sponsor");
-	revalidatePath(`/product/${slug}`);
-	revalidatePath("/admin");
+	revalidateCatalogPages(slug);
 }
