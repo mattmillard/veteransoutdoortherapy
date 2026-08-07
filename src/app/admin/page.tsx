@@ -1,7 +1,7 @@
-import { LockKeyhole, LogOut, PackagePlus, Pencil } from "lucide-react";
+import { Copy, LockKeyhole, LogOut, PackagePlus, Pencil } from "lucide-react";
 import { isAdmin } from "@/lib/auth";
 import { getProducts } from "@/lib/db";
-import { deleteProductAction, loginAction, logoutAction, saveProductAction } from "./actions";
+import { deleteProductAction, duplicateProductAction, loginAction, logoutAction, saveProductAction } from "./actions";
 
 export default async function AdminPage({
 	searchParams,
@@ -55,6 +55,9 @@ export default async function AdminPage({
 				{query.saveError === "upload-failed" && (
 					<p className="form-error">Image upload failed. Please try again or use an existing image URL.</p>
 				)}
+				{query.saveError === "save-failed" && (
+					<p className="form-error">Saving failed. Check required fields and make sure the slug is unique.</p>
+				)}
 				<div className="admin-grid">
 					<form className="product-form" action={saveProductAction}>
 						<h2>
@@ -101,8 +104,9 @@ export default async function AdminPage({
 						</label>
 						<label>
 							Existing image URL
-							<input className="field" name="image" type="url" defaultValue={selected?.image} />
+							<input className="field" name="image" defaultValue={selected?.image} />
 						</label>
+						<input type="hidden" name="existingImage" value={selected?.image || ""} />
 						<label>
 							Or upload a new image
 							<input className="field" name="imageFile" type="file" accept="image/png,image/jpeg,image/webp" />
@@ -137,6 +141,12 @@ export default async function AdminPage({
 								<a className="icon-button" href={`/admin?edit=${product.slug}`} aria-label={`Edit ${product.name}`}>
 									<Pencil size={17} />
 								</a>
+								<form action={duplicateProductAction}>
+									<input type="hidden" name="slug" value={product.slug} />
+									<button className="icon-button" aria-label={`Duplicate ${product.name}`} type="submit">
+										<Copy size={16} />
+									</button>
+								</form>
 								<form action={deleteProductAction}>
 									<input type="hidden" name="slug" value={product.slug} />
 									<button className="icon-button danger" aria-label={`Delete ${product.name}`} type="submit">
