@@ -6,7 +6,7 @@ import { useState } from "react";
 import { useCart } from "./cart-provider";
 
 const groups = [
-  { label: "Events", links: [["All events", "/events-3"], ["Poker Run 2026", "/poker-run-2026"], ["Get involved", "/application"]] },
+  { label: "Events", links: [["All events", "/events-3"], ["Get involved", "/application"]] },
   { label: "About", links: [["Our mission", "/about"], ["Gallery", "/gallery"], ["Contact", "/contact-7"]] },
   { label: "Shop", links: [["Merchandise", "/product-category/merchandise"], ["All products", "/products"]] },
 ];
