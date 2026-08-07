@@ -600,17 +600,24 @@ img {
 	max-width: 980px;
 }
 .quote span {
-	font: 7rem/0 var(--font-display);
+	font: 5.4rem/0 var(--font-display);
 	opacity: 0.5;
 }
 .quote blockquote {
-	max-width: 960px;
-	margin: 18px 0 14px;
-	font: 600 clamp(2rem, 4.4vw, 3.9rem) / 1.05 var(--font-display);
-	text-transform: uppercase;
+	max-width: 860px;
+	margin: 20px 0 16px;
+	font: 600 clamp(1.28rem, 1.8vw, 2rem) / 1.35 var(--font-body);
+	text-transform: none;
+}
+.quote blockquote p {
+	margin: 0;
+}
+.quote blockquote p + p {
+	margin-top: 14px;
 }
 .quote p {
 	margin: 0;
+	font-size: 0.92rem;
 	font-weight: 700;
 	letter-spacing: 0.04em;
 	text-transform: uppercase;
@@ -620,8 +627,8 @@ img {
 		padding: 92px 0;
 	}
 	.quote blockquote {
-		font-size: 3.55rem;
-		line-height: 1.08;
+		font-size: 2.02rem;
+		line-height: 1.33;
 	}
 }
 .page-hero {
