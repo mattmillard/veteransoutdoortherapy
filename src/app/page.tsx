@@ -10,13 +10,6 @@ export default async function Home() {
 	return (
 		<>
 			<section className="hero">
-				<Image
-					src="https://veteransoutdoortherapy.org/wp-content/uploads/2025/09/552626219_122157680714799810_368606548123490962_n-980x735.jpg"
-					alt="Veterans sharing an outdoor adventure"
-					fill
-					priority
-					sizes="100vw"
-				/>
 				<div className="hero-shade" />
 				<div className="container hero-content">
 					<p className="eyebrow">Honoring Our Nation&apos;s Heroes</p>
@@ -148,8 +141,8 @@ export default async function Home() {
 					<span>“</span>
 					<blockquote>
 						<p>
-							This event meant the world to me! It gave me hope again in America and our country. It made me realize that
-							I am not alone and there are other members who have been through what I have.
+							This event meant the world to me! It gave me hope again in America and our country. It made me realize
+							that I am not alone and there are other members who have been through what I have.
 						</p>
 						<p>
 							The community involved in this event was the best. They lifted my spirits so much! It was emotional for me
