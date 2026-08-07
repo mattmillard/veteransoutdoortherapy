@@ -1,150 +1,182 @@
 export type Product = {
-  slug: string;
-  name: string;
-  shortName: string;
-  price: number;
-  category: "Merchandise" | "Sponsorships";
-  description: string;
-  image: string;
-  gallery: string[];
-  sizes?: string[];
-  stock?: number;
-  featured?: boolean;
+	slug: string;
+	name: string;
+	shortName: string;
+	price: number;
+	category: string;
+	description: string;
+	image: string;
+	gallery: string[];
+	sizes?: string[];
+	stock?: number;
+	featured?: boolean;
 };
 
 const uploads = "https://veteransoutdoortherapy.org/wp-content/uploads";
 
 export const products: Product[] = [
-  {
-    slug: "veterans-outdoor-therapy-camo-hoodie-veteran-outdoor-apparel",
-    name: "Veteran's Outdoor Therapy Camo Hoodie",
-    shortName: "Camo Hoodie",
-    price: 30,
-    category: "Merchandise",
-    description: "A warm, comfortable camouflage hoodie built for those who find clarity, strength, and healing in the wild. Soft midweight fleece, an adjustable hood, and a front kangaroo pocket make it ready for cool mornings and nights by the fire.",
-    image: `${uploads}/2026/01/thumbnail_IMG_7725.jpg`,
-    gallery: [`${uploads}/2026/01/thumbnail_IMG_7725.jpg`],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    featured: true,
-  },
-  {
-    slug: "veterans-outdoor-therapy-performance-t-shirt-gray-orange",
-    name: "Veteran's Outdoor Therapy Performance T-Shirt",
-    shortName: "Performance T-Shirt",
-    price: 40,
-    category: "Merchandise",
-    description: "A lightweight, moisture-wicking performance shirt with a breathable gray body and blaze-orange accents, designed for hikes, workouts, range days, and time in the field.",
-    image: `${uploads}/2025/12/IMG_4715.jpeg`,
-    gallery: [`${uploads}/2025/12/IMG_4715.jpeg`],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    featured: true,
-  },
-  {
-    slug: "veterans-outdoor-therapy-pullover-hoodie-gray-hoodie",
-    name: "Veteran's Outdoor Therapy Pullover Hoodie - Gray",
-    shortName: "Gray Pullover Hoodie",
-    price: 30,
-    category: "Merchandise",
-    description: "A soft gray pullover with an adjustable hood, kangaroo pocket, ribbed cuffs, and the Veterans Outdoor Therapy mark on the chest.",
-    image: `${uploads}/2025/12/FullSizeRender-3-scaled.jpeg`,
-    gallery: [`${uploads}/2025/12/FullSizeRender-3-scaled.jpeg`],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-  },
-  {
-    slug: "veterans-outdoor-therapy-pullover-hoodie-maroon-hoodie",
-    name: "Veteran's Outdoor Therapy Pullover Hoodie - Maroon",
-    shortName: "Maroon Pullover Hoodie",
-    price: 30,
-    category: "Merchandise",
-    description: "A comfortable maroon pullover hoodie made for camp, evenings by the fire, and everyday support of the mission.",
-    image: `${uploads}/2025/12/FullSizeRender-scaled.jpeg`,
-    gallery: [`${uploads}/2025/12/FullSizeRender-scaled.jpeg`],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-  },
-  {
-    slug: "veterans-outdoor-therapy-pullover-hoodie-tan-hoodie",
-    name: "Veteran's Outdoor Therapy Pullover Hoodie - Tan",
-    shortName: "Tan Pullover Hoodie",
-    price: 30,
-    category: "Merchandise",
-    description: "A comfortable tan pullover hoodie featuring the Veterans Outdoor Therapy logo, an adjustable hood, and a classic kangaroo pocket.",
-    image: `${uploads}/2025/12/FullSizeRender-4.jpeg`,
-    gallery: [`${uploads}/2025/12/FullSizeRender-4.jpeg`],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-  },
-  {
-    slug: "veterans-outdoor-therapy-t-shirt-nature-inspired-veteran-apparel",
-    name: "Veteran's Outdoor Therapy T-Shirt - Sage",
-    shortName: "Sage Mission T-Shirt",
-    price: 25,
-    category: "Merchandise",
-    description: "A soft sage-green unisex tee where mountains, wildlife, and open air symbolize healing, resilience, and purpose.",
-    image: `${uploads}/2025/12/IMG_4733-scaled.jpeg`,
-    gallery: [`${uploads}/2025/12/IMG_4733-scaled.jpeg`],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-  },
-  {
-    slug: "veterans-outdoor-therapy-t-shirt-nature-inspired-veteran-apparel-copy",
-    name: "Veteran's Outdoor Therapy T-Shirt - Burnt Orange",
-    shortName: "Orange Mission T-Shirt",
-    price: 25,
-    category: "Merchandise",
-    description: "A soft burnt-orange unisex tee with a durable nature-inspired mark, made for the trail, campfire, or everyday wear.",
-    image: `${uploads}/2025/12/IMG_4726.jpeg`,
-    gallery: [`${uploads}/2025/12/IMG_4726.jpeg`],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-  },
-  {
-    slug: "veterans-outdoor-therapy-turkey-mug-ceramic-coffee-mug",
-    name: "Veteran's Outdoor Therapy Turkey Mug",
-    shortName: "Turkey Camp Mug",
-    price: 25,
-    category: "Merchandise",
-    description: "A durable ceramic mug with a bold orange handle and interior, the mission logo on one side, and detailed wild turkey artwork on the other.",
-    image: `${uploads}/2025/12/IMG_7112.jpeg`,
-    gallery: [`${uploads}/2025/12/IMG_7112.jpeg`],
-    stock: 20,
-  },
-  {
-    slug: "veterans-outdoor-therapy-two-tone-camo-hoodie-outdoor-veteran-apparel",
-    name: "Veteran's Outdoor Therapy Two-Tone Camo Hoodie",
-    shortName: "Two-Tone Camo Hoodie",
-    price: 50,
-    category: "Merchandise",
-    description: "A premium tan hoodie with camouflage sleeves and hood, a relaxed unisex fit, and durable mission artwork.",
-    image: `${uploads}/2026/01/GetAttachmentThumbnail.jpg`,
-    gallery: [`${uploads}/2026/01/GetAttachmentThumbnail.jpg`],
-    sizes: ["S", "M", "L", "XL", "XXL"],
-    featured: true,
-  },
-  ...[
-    ["custom-sponsor", "Custom Sponsor", 100],
-    ["bronze-sponsor", "Bronze Sponsor", 1000],
-    ["silver-sponsor", "Silver Sponsor", 3000],
-    ["gold-sponsor", "Gold Sponsor", 5000],
-  ].map(([slug, name, price]) => ({
-    slug: String(slug),
-    name: String(name),
-    shortName: String(name),
-    price: Number(price),
-    category: "Sponsorships" as const,
-    description: "Directly fund fully supported outdoor adventures that build connection, restore confidence, and create room for healing.",
-    image: `${uploads}/2025/09/514023039_122139090914799810_7702720490048483923_n.jpg`,
-    gallery: [`${uploads}/2025/09/514023039_122139090914799810_7702720490048483923_n.jpg`],
-  })),
+	{
+		slug: "veterans-outdoor-therapy-camo-hoodie-veteran-outdoor-apparel",
+		name: "Veteran's Outdoor Therapy Camo Hoodie",
+		shortName: "Camo Hoodie",
+		price: 30,
+		category: "Merchandise",
+		description:
+			"A warm, comfortable camouflage hoodie built for those who find clarity, strength, and healing in the wild. Soft midweight fleece, an adjustable hood, and a front kangaroo pocket make it ready for cool mornings and nights by the fire.",
+		image: `${uploads}/2026/01/thumbnail_IMG_7725.jpg`,
+		gallery: [`${uploads}/2026/01/thumbnail_IMG_7725.jpg`],
+		sizes: ["S", "M", "L", "XL", "XXL"],
+		featured: true,
+	},
+	{
+		slug: "veterans-outdoor-therapy-performance-t-shirt-gray-orange",
+		name: "Veteran's Outdoor Therapy Performance T-Shirt",
+		shortName: "Performance T-Shirt",
+		price: 40,
+		category: "Merchandise",
+		description:
+			"A lightweight, moisture-wicking performance shirt with a breathable gray body and blaze-orange accents, designed for hikes, workouts, range days, and time in the field.",
+		image: `${uploads}/2025/12/IMG_4715.jpeg`,
+		gallery: [`${uploads}/2025/12/IMG_4715.jpeg`],
+		sizes: ["S", "M", "L", "XL", "XXL"],
+		featured: true,
+	},
+	{
+		slug: "veterans-outdoor-therapy-pullover-hoodie-gray-hoodie",
+		name: "Veteran's Outdoor Therapy Pullover Hoodie - Gray",
+		shortName: "Gray Pullover Hoodie",
+		price: 30,
+		category: "Merchandise",
+		description:
+			"A soft gray pullover with an adjustable hood, kangaroo pocket, ribbed cuffs, and the Veterans Outdoor Therapy mark on the chest.",
+		image: `${uploads}/2025/12/FullSizeRender-3-scaled.jpeg`,
+		gallery: [`${uploads}/2025/12/FullSizeRender-3-scaled.jpeg`],
+		sizes: ["S", "M", "L", "XL", "XXL"],
+	},
+	{
+		slug: "veterans-outdoor-therapy-pullover-hoodie-maroon-hoodie",
+		name: "Veteran's Outdoor Therapy Pullover Hoodie - Maroon",
+		shortName: "Maroon Pullover Hoodie",
+		price: 30,
+		category: "Merchandise",
+		description:
+			"A comfortable maroon pullover hoodie made for camp, evenings by the fire, and everyday support of the mission.",
+		image: `${uploads}/2025/12/FullSizeRender-scaled.jpeg`,
+		gallery: [`${uploads}/2025/12/FullSizeRender-scaled.jpeg`],
+		sizes: ["S", "M", "L", "XL", "XXL"],
+	},
+	{
+		slug: "veterans-outdoor-therapy-pullover-hoodie-tan-hoodie",
+		name: "Veteran's Outdoor Therapy Pullover Hoodie - Tan",
+		shortName: "Tan Pullover Hoodie",
+		price: 30,
+		category: "Merchandise",
+		description:
+			"A comfortable tan pullover hoodie featuring the Veterans Outdoor Therapy logo, an adjustable hood, and a classic kangaroo pocket.",
+		image: `${uploads}/2025/12/FullSizeRender-4.jpeg`,
+		gallery: [`${uploads}/2025/12/FullSizeRender-4.jpeg`],
+		sizes: ["S", "M", "L", "XL", "XXL"],
+	},
+	{
+		slug: "veterans-outdoor-therapy-t-shirt-nature-inspired-veteran-apparel",
+		name: "Veteran's Outdoor Therapy T-Shirt - Sage",
+		shortName: "Sage Mission T-Shirt",
+		price: 25,
+		category: "Merchandise",
+		description:
+			"A soft sage-green unisex tee where mountains, wildlife, and open air symbolize healing, resilience, and purpose.",
+		image: `${uploads}/2025/12/IMG_4733-scaled.jpeg`,
+		gallery: [`${uploads}/2025/12/IMG_4733-scaled.jpeg`],
+		sizes: ["S", "M", "L", "XL", "XXL"],
+	},
+	{
+		slug: "veterans-outdoor-therapy-t-shirt-nature-inspired-veteran-apparel-copy",
+		name: "Veteran's Outdoor Therapy T-Shirt - Burnt Orange",
+		shortName: "Orange Mission T-Shirt",
+		price: 25,
+		category: "Merchandise",
+		description:
+			"A soft burnt-orange unisex tee with a durable nature-inspired mark, made for the trail, campfire, or everyday wear.",
+		image: `${uploads}/2025/12/IMG_4726.jpeg`,
+		gallery: [`${uploads}/2025/12/IMG_4726.jpeg`],
+		sizes: ["S", "M", "L", "XL", "XXL"],
+	},
+	{
+		slug: "veterans-outdoor-therapy-turkey-mug-ceramic-coffee-mug",
+		name: "Veteran's Outdoor Therapy Turkey Mug",
+		shortName: "Turkey Camp Mug",
+		price: 25,
+		category: "Merchandise",
+		description:
+			"A durable ceramic mug with a bold orange handle and interior, the mission logo on one side, and detailed wild turkey artwork on the other.",
+		image: `${uploads}/2025/12/IMG_7112.jpeg`,
+		gallery: [`${uploads}/2025/12/IMG_7112.jpeg`],
+		stock: 20,
+	},
+	{
+		slug: "veterans-outdoor-therapy-two-tone-camo-hoodie-outdoor-veteran-apparel",
+		name: "Veteran's Outdoor Therapy Two-Tone Camo Hoodie",
+		shortName: "Two-Tone Camo Hoodie",
+		price: 50,
+		category: "Merchandise",
+		description:
+			"A premium tan hoodie with camouflage sleeves and hood, a relaxed unisex fit, and durable mission artwork.",
+		image: `${uploads}/2026/01/GetAttachmentThumbnail.jpg`,
+		gallery: [`${uploads}/2026/01/GetAttachmentThumbnail.jpg`],
+		sizes: ["S", "M", "L", "XL", "XXL"],
+		featured: true,
+	},
+	...[
+		["custom-sponsor", "Custom Sponsor", 100],
+		["bronze-sponsor", "Bronze Sponsor", 1000],
+		["silver-sponsor", "Silver Sponsor", 3000],
+		["gold-sponsor", "Gold Sponsor", 5000],
+	].map(([slug, name, price]) => ({
+		slug: String(slug),
+		name: String(name),
+		shortName: String(name),
+		price: Number(price),
+		category: "Sponsorships" as const,
+		description:
+			"Directly fund fully supported outdoor adventures that build connection, restore confidence, and create room for healing.",
+		image: `${uploads}/2025/09/514023039_122139090914799810_7702720490048483923_n.jpg`,
+		gallery: [`${uploads}/2025/09/514023039_122139090914799810_7702720490048483923_n.jpg`],
+	})),
 ];
 
 export const events = [
-  { title: "Missouri Turkey Hunt", date: "April 30 - May 3", image: `${uploads}/2026/01/turkey.jpg`, type: "Hunt" },
-  { title: "Flint Hills, KS Turkey Hunt", date: "May 14 - May 17", image: `${uploads}/2026/01/turkey2.jpg`, type: "Hunt" },
-  { title: "Poker Run", date: "June 20", image: `${uploads}/2025/10/thumbnail_IMG_4884-980x735.jpg`, type: "Fundraiser" },
-  { title: "Coulter Lake Guest Ranch", date: "July 8 - July 12", image: `${uploads}/2026/01/horseback.jpg`, type: "Female horseback camp" },
-  { title: "Rocky Point Recreational Park", date: "September 16 - September 20", image: `${uploads}/2025/09/552626219_122157680714799810_368606548123490962_n-980x735.jpg`, type: "Archery antelope hunt" },
+	{ title: "Missouri Turkey Hunt", date: "April 30 - May 3", image: `${uploads}/2026/01/turkey.jpg`, type: "Hunt" },
+	{
+		title: "Flint Hills, KS Turkey Hunt",
+		date: "May 14 - May 17",
+		image: `${uploads}/2026/01/turkey2.jpg`,
+		type: "Hunt",
+	},
+	{
+		title: "Poker Run",
+		date: "June 20",
+		image: `${uploads}/2025/10/thumbnail_IMG_4884-980x735.jpg`,
+		type: "Fundraiser",
+	},
+	{
+		title: "Coulter Lake Guest Ranch",
+		date: "July 8 - July 12",
+		image: `${uploads}/2026/01/horseback.jpg`,
+		type: "Female horseback camp",
+	},
+	{
+		title: "Rocky Point Recreational Park",
+		date: "September 16 - September 20",
+		image: `${uploads}/2025/09/552626219_122157680714799810_368606548123490962_n-980x735.jpg`,
+		type: "Archery antelope hunt",
+	},
 ];
 
-export const healingPowerCopy = "Engaging in activities such as hiking, horseback riding, fishing, and hunting offers a refreshing escape from daily life while creating opportunities for reflection and bonding with fellow veterans who understand similar experiences and challenges. These adventures can significantly alleviate stress and contribute to the mental well-being of our Soldiers and Gold Star family members. We LOVE the outdoors, have witnessed its healing power, and are thrilled to share our passion with others!";
+export const healingPowerCopy =
+	"Engaging in activities such as hiking, horseback riding, fishing, and hunting offers a refreshing escape from daily life while creating opportunities for reflection and bonding with fellow veterans who understand similar experiences and challenges. These adventures can significantly alleviate stress and contribute to the mental well-being of our Soldiers and Gold Star family members. We LOVE the outdoors, have witnessed its healing power, and are thrilled to share our passion with others!";
 
-export const contributionCopy = "Not everyone can sponsor at the Gold, Silver, or Bronze level — and that’s okay. Every donation, big or small, helps us give Veterans a chance to heal through the peace of the outdoors. Whether your gift helps provide a warm meal on a hunt, fuel for a fishing trip, or gear for an adventure, you’re directly impacting the lives of those who’ve served our nation. Join us in showing our Veterans that they are never alone on their journey to healing.";
+export const contributionCopy =
+	"Not everyone can sponsor at the Gold, Silver, or Bronze level — and that’s okay. Every donation, big or small, helps us give Veterans a chance to heal through the peace of the outdoors. Whether your gift helps provide a warm meal on a hunt, fuel for a fishing trip, or gear for an adventure, you’re directly impacting the lives of those who’ve served our nation. Join us in showing our Veterans that they are never alone on their journey to healing.";
 
 const galleryFiles = `
 2025/09/481919614_10235564637753446_8095133793450501592_n.jpg
@@ -285,8 +317,11 @@ const galleryFiles = `
 2026/01/IMG_7371-1-rotated.jpeg
 2026/01/IMG_7397-1.jpeg
 2026/01/IMG_7397-1-scaled.jpeg
-`.trim().split("\n");
+`
+	.trim()
+	.split("\n");
 
 export const galleryImages = galleryFiles.map((file) => `${uploads}/${file}`);
 
-export const mission = "At Veteran's Outdoor Therapy, our mission is to provide fully funded outdoor adventures for America's heroes as a way to honor the service of Soldiers who have been deployed, and in some instances, sustained the wounds of war. We also extend our support to Gold Star families and children. These outdoor experiences offer a unique blend of physical activity, camaraderie, and emotional healing, enabling participants to reconnect with themselves and nature.";
+export const mission =
+	"At Veteran's Outdoor Therapy, our mission is to provide fully funded outdoor adventures for America's heroes as a way to honor the service of Soldiers who have been deployed, and in some instances, sustained the wounds of war. We also extend our support to Gold Star families and children. These outdoor experiences offer a unique blend of physical activity, camaraderie, and emotional healing, enabling participants to reconnect with themselves and nature.";

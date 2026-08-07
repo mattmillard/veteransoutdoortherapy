@@ -33,6 +33,9 @@ export default async function AdminPage({
 			</section>
 		);
 	const products = await getProducts();
+	const categories = Array.from(
+		new Set(products.map((product) => product.category.trim()).filter((category) => category.length > 0)),
+	).sort((a, b) => a.localeCompare(b));
 	const selected = products.find((product) => product.slug === query.edit);
 	return (
 		<section className="admin-page">
@@ -92,12 +95,20 @@ export default async function AdminPage({
 							</label>
 							<label>
 								Category
-								<select className="field" name="category" defaultValue={selected?.category}>
-									<option>Merchandise</option>
-									<option>Sponsorships</option>
-								</select>
+								<input
+									className="field"
+									name="category"
+									list="product-categories"
+									defaultValue={selected?.category || "Merchandise"}
+									required
+								/>
 							</label>
 						</div>
+						<datalist id="product-categories">
+							{categories.map((category) => (
+								<option key={category} value={category} />
+							))}
+						</datalist>
 						<label>
 							Description
 							<textarea className="field" name="description" rows={5} defaultValue={selected?.description} required />

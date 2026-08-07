@@ -591,6 +591,72 @@ img {
 .shop-grid {
 	margin-top: 45px;
 }
+.catalog-tabs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 34px;
+}
+.catalog-tab {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	padding: 9px 14px;
+	border: 1px solid var(--line);
+	background: #ece9dd;
+	color: var(--ink);
+	cursor: pointer;
+	transition:
+		transform 0.18s,
+		background 0.18s,
+		border-color 0.18s;
+}
+.catalog-tab:hover {
+	transform: translateY(-1px);
+	border-color: #98a08f;
+}
+.catalog-tab.active {
+	background: var(--ink);
+	border-color: var(--ink);
+	color: var(--white);
+}
+.catalog-tab span {
+	font-weight: 700;
+}
+.catalog-tab b {
+	display: inline-grid;
+	place-items: center;
+	min-width: 25px;
+	height: 25px;
+	padding-inline: 7px;
+	border-radius: 999px;
+	background: rgba(255, 255, 255, 0.24);
+	font-size: 0.76rem;
+	line-height: 1;
+}
+.product-masonry {
+	column-count: 3;
+	column-gap: 18px;
+	margin-top: 26px;
+}
+.masonry-item {
+	break-inside: avoid;
+	margin-bottom: 18px;
+	animation: productReveal 0.36s ease both;
+}
+.masonry-item .product-card {
+	height: 100%;
+}
+@keyframes productReveal {
+	from {
+		opacity: 0;
+		transform: translateY(9px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
 .quote {
 	background-image:
 		linear-gradient(90deg, rgba(12, 19, 14, 0.82) 0%, rgba(12, 19, 14, 0.6) 55%, rgba(12, 19, 14, 0.76) 100%),
@@ -846,6 +912,9 @@ img {
 	.product-grid {
 		grid-template-columns: repeat(2, 1fr);
 	}
+	.product-masonry {
+		column-count: 2;
+	}
 	.story-image {
 		min-height: 400px;
 	}
@@ -868,6 +937,13 @@ img {
 	.value-grid,
 	.team-grid {
 		grid-template-columns: 1fr;
+	}
+	.product-masonry {
+		column-count: 1;
+		column-gap: 0;
+	}
+	.catalog-tab {
+		padding: 9px 12px;
 	}
 	.event-card {
 		min-height: 420px;
