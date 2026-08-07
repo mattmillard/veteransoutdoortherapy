@@ -414,7 +414,7 @@ img {
 }
 .mission-grid h2 {
 	margin: 0;
-	font-size: clamp(2.5rem, 5vw, 4.7rem);
+	font-size: clamp(2.5rem, 5vw, 3.7rem);
 }
 .mission-grid .eyebrow {
 	color: #ef9b70;
