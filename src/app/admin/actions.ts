@@ -5,6 +5,17 @@ import { redirect } from "next/navigation";
 import { isAdmin, login, logout } from "@/lib/auth";
 import { deleteProduct, getProducts, saveProduct } from "@/lib/db";
 
+function revalidateCatalogPages(slug: string) {
+	revalidatePath("/");
+	revalidatePath("/shop");
+	revalidatePath("/products");
+	revalidatePath("/product-category/merchandise");
+	revalidatePath("/sponsor");
+	revalidatePath("/product-category/sponsorships");
+	revalidatePath(`/product/${slug}`);
+	revalidatePath("/admin");
+}
+
 function slugify(value: string) {
 	return value
 		.toLowerCase()
@@ -78,11 +89,7 @@ export async function saveProductAction(form: FormData) {
 		console.error("Product save failed", { slug, error });
 		redirect("/admin?saveError=save-failed");
 	}
-	revalidatePath("/");
-	revalidatePath("/shop");
-	revalidatePath("/sponsor");
-	revalidatePath(`/product/${slug}`);
-	revalidatePath("/admin");
+	revalidateCatalogPages(slug);
 	redirect("/admin?saved=1");
 }
 
@@ -117,20 +124,12 @@ export async function duplicateProductAction(form: FormData) {
 		redirect("/admin?saveError=save-failed");
 	}
 
-	revalidatePath("/");
-	revalidatePath("/shop");
-	revalidatePath("/sponsor");
-	revalidatePath(`/product/${duplicateSlug}`);
-	revalidatePath("/admin");
+	revalidateCatalogPages(duplicateSlug);
 	redirect(`/admin?edit=${duplicateSlug}&saved=1`);
 }
 export async function deleteProductAction(form: FormData) {
 	if (!(await isAdmin())) redirect("/admin");
 	const slug = String(form.get("slug") || "");
 	await deleteProduct(slug);
-	revalidatePath("/");
-	revalidatePath("/shop");
-	revalidatePath("/sponsor");
-	revalidatePath(`/product/${slug}`);
-	revalidatePath("/admin");
+	revalidateCatalogPages(slug);
 }
