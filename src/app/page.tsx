@@ -34,9 +34,11 @@ export default async function Home() {
 			</section>
 			<section className="mission-band">
 				<div className="container mission-grid">
-					<p className="eyebrow">Our mission</p>
-					<h2 className="display">Service deserves more than thanks.</h2>
-					<p>{mission}</p>
+					<div className="mission-heading">
+						<p className="eyebrow">Our mission</p>
+						<h2 className="display">Service deserves more than thanks.</h2>
+					</div>
+					<p className="mission-copy">{mission}</p>
 				</div>
 			</section>
 			<section className="section healing-section">
