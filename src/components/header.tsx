@@ -51,10 +51,10 @@ export function Header() {
 				<Link className="brand" href="/" aria-label="Veterans Outdoor Therapy home" onClick={closeNavigation}>
 					<Image
 						className="brand-logo"
-						src="/vot-logo-navigation.png?v=1"
+						src="/vot-logo-original.png"
 						alt="Veterans Outdoor Therapy"
-						width={2500}
-						height={600}
+						width={799}
+						height={550}
 						priority
 						unoptimized
 					/>

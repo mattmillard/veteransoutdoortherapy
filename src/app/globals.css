@@ -149,8 +149,8 @@ img {
 	align-items: center;
 }
 .brand-logo {
-	width: 270px;
-	height: 65px;
+	width: 105px;
+	height: 72px;
 	object-fit: contain;
 }
 .nav {
@@ -339,8 +339,8 @@ img {
 		min-width: 0;
 	}
 	.brand-logo {
-		width: 220px;
-		height: 53px;
+		width: 92px;
+		height: 66px;
 	}
 }
 @media (max-width: 720px) {
