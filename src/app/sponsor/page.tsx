@@ -3,7 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { getProducts } from "@/lib/db";
 import type { Metadata } from "next";
-export const metadata: Metadata = { title: "Sponsorships" };
+export const metadata: Metadata = {
+	title: "Sponsorships",
+	alternates: { canonical: "/sponsorships" },
+};
 const uploads = "https://veteransoutdoortherapy.org/wp-content/uploads";
 const tierDetails: Record<string, { tagline: string; benefits: string[] }> = {
 	"bronze-sponsor": {

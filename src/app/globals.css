@@ -1391,6 +1391,9 @@ img {
 .sponsor-hero {
 	background: #253d2c;
 }
+.sponsor-hero h1 {
+	font-size: clamp(2.75rem, 5vw, 4.75rem);
+}
 .sponsor-hero .button {
 	margin-top: 24px;
 }

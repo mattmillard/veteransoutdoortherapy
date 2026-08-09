@@ -24,7 +24,7 @@ export function Footer() {
 				<div>
 					<h3>Take action</h3>
 					<Link href="/application">Apply</Link>
-					<Link href="/sponsorships-2">Sponsor</Link>
+					<Link href="/sponsorships">Sponsor</Link>
 					<Link href="/donate">Donate</Link>
 					<Link href="/shop">Shop</Link>
 				</div>

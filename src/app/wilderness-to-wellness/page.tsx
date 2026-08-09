@@ -30,7 +30,7 @@ export default function WellnessPage() {
 						peace that comes from the great outdoors. The 2026 event is sold out, but the mission and the path forward
 						continue.
 					</p>
-					<Link className="text-link" href="/sponsorships-2">
+					<Link className="text-link" href="/sponsorships">
 						Join us in making a difference
 					</Link>
 				</div>

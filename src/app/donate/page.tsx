@@ -41,7 +41,7 @@ export default function DonatePage() {
 						<Link className="button orange" href="/product/custom-sponsor">
 							Make a donation <ArrowRight size={18} />
 						</Link>
-						<Link className="button hero-secondary" href="/sponsorships-2">
+						<Link className="button hero-secondary" href="/sponsorships">
 							Explore sponsorships
 						</Link>
 					</div>

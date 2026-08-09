@@ -1,1 +1,5 @@
-export { default, metadata } from "../sponsor/page";
+import { permanentRedirect } from "next/navigation";
+
+export default function LegacySponsorshipsPage() {
+	permanentRedirect("/sponsorships");
+}

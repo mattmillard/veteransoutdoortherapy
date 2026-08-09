@@ -131,7 +131,7 @@ export default async function Home() {
 							<Link className="button orange" href="/donate">
 								Donate now
 							</Link>
-							<Link className="text-link" href="/sponsorships-2">
+							<Link className="text-link" href="/sponsorships">
 								Explore sponsorships <ArrowRight size={17} />
 							</Link>
 						</div>

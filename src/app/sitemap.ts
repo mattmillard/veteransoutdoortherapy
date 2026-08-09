@@ -16,7 +16,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 		"/gallery",
 		"/services-2",
 		"/shop",
-		"/sponsorships-2",
+		"/sponsorships",
 		"/team",
 		"/wilderness-to-wellness",
 		"/poker-run-2026",

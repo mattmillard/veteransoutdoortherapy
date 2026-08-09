@@ -90,7 +90,7 @@ export function Header() {
 							</div>
 						</details>
 					))}
-					<Link href="/sponsorships-2" onClick={closeNavigation}>
+					<Link href="/sponsorships" onClick={closeNavigation}>
 						Sponsorships
 					</Link>
 					<Link className="give" href="/donate" onClick={closeNavigation}>
