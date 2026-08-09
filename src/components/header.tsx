@@ -40,6 +40,7 @@ export function Header() {
 		setOpenPath(null);
 		setOpenGroup(null);
 	};
+	const supportsDesktopHover = () => window.matchMedia("(min-width: 921px) and (hover: hover)").matches;
 	const { count } = useCart();
 	return (
 		<>
@@ -60,7 +61,17 @@ export function Header() {
 				</Link>
 				<nav key={pathname} className={open ? "nav open" : "nav"} aria-label="Main navigation">
 					{groups.map((group) => (
-						<details className="nav-group" key={group.label} open={openGroup === group.label}>
+						<details
+							className="nav-group"
+							key={group.label}
+							open={openGroup === group.label}
+							onMouseEnter={() => {
+								if (supportsDesktopHover()) setOpenGroup(group.label);
+							}}
+							onMouseLeave={() => {
+								if (supportsDesktopHover()) setOpenGroup(null);
+							}}
+						>
 							<summary
 								onClick={(event) => {
 									event.preventDefault();
