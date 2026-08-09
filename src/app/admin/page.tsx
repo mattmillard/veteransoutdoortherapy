@@ -1,12 +1,13 @@
 import { Copy, LockKeyhole, LogOut, PackagePlus, Pencil } from "lucide-react";
 import { isAdmin } from "@/lib/auth";
-import { getProducts } from "@/lib/db";
+import { getEvents, getProducts } from "@/lib/db";
 import { deleteProductAction, duplicateProductAction, loginAction, logoutAction, saveProductAction } from "./actions";
+import { EventAdmin } from "./event-admin";
 
 export default async function AdminPage({
 	searchParams,
 }: {
-	searchParams: Promise<{ edit?: string; error?: string; saved?: string; saveError?: string }>;
+	searchParams: Promise<{ view?: string; edit?: string; error?: string; saved?: string; deleted?: string; saveError?: string }>;
 }) {
 	const query = await searchParams;
 	const authenticated = await isAdmin();
@@ -32,18 +33,20 @@ export default async function AdminPage({
 				</form>
 			</section>
 		);
-	const products = await getProducts();
+	const view = query.view === "events" ? "events" : "products";
+	const [products, events] = await Promise.all([getProducts(), getEvents()]);
 	const categories = Array.from(
 		new Set(products.map((product) => product.category.trim()).filter((category) => category.length > 0)),
 	).sort((a, b) => a.localeCompare(b));
-	const selected = products.find((product) => product.slug === query.edit);
+	const selectedProduct = products.find((product) => product.slug === query.edit);
+	const selectedEvent = events.find((event) => event.slug === query.edit);
 	return (
 		<section className="admin-page">
 			<div className="container">
 				<header>
 					<div>
-						<p className="eyebrow">Store operations</p>
-						<h1 className="display">Product admin</h1>
+						<p className="eyebrow">Site operations</p>
+						<h1 className="display">Content admin</h1>
 					</div>
 					<form action={logoutAction}>
 						<button className="button secondary">
@@ -51,7 +54,16 @@ export default async function AdminPage({
 						</button>
 					</form>
 				</header>
-				{query.saved && <p className="success-note">Product saved.</p>}
+				<nav className="admin-tabs" aria-label="Admin sections">
+					<a className={view === "products" ? "active" : ""} href="/admin">
+						Products
+					</a>
+					<a className={view === "events" ? "active" : ""} href="/admin?view=events">
+						Events
+					</a>
+				</nav>
+				{query.saved && <p className="success-note">{view === "events" ? "Event" : "Product"} saved.</p>}
+				{query.deleted && <p className="success-note">Event deleted.</p>}
 				{query.saveError === "upload-config" && (
 					<p className="form-error">Image upload is not configured. Add BLOB_READ_WRITE_TOKEN to your environment.</p>
 				)}
@@ -61,23 +73,26 @@ export default async function AdminPage({
 				{query.saveError === "save-failed" && (
 					<p className="form-error">Saving failed. Check required fields and make sure the slug is unique.</p>
 				)}
+				{view === "events" ? (
+					<EventAdmin events={events} selected={selectedEvent} />
+				) : (
 				<div className="admin-grid">
 					<form className="product-form" action={saveProductAction}>
 						<h2>
-							<PackagePlus size={20} /> {selected ? "Edit product" : "Add product"}
+							<PackagePlus size={20} /> {selectedProduct ? "Edit product" : "Add product"}
 						</h2>
 						<label>
 							Product name
-							<input className="field" name="name" defaultValue={selected?.name} required />
+							<input className="field" name="name" defaultValue={selectedProduct?.name} required />
 						</label>
 						<div className="form-row">
 							<label>
 								Short display name
-								<input className="field" name="shortName" defaultValue={selected?.shortName} required />
+								<input className="field" name="shortName" defaultValue={selectedProduct?.shortName} required />
 							</label>
 							<label>
 								Slug
-								<input className="field" name="slug" defaultValue={selected?.slug} />
+								<input className="field" name="slug" defaultValue={selectedProduct?.slug} />
 							</label>
 						</div>
 						<div className="form-row">
@@ -89,7 +104,7 @@ export default async function AdminPage({
 									type="number"
 									min="0"
 									step="0.01"
-									defaultValue={selected?.price}
+									defaultValue={selectedProduct?.price}
 									required
 								/>
 							</label>
@@ -99,7 +114,7 @@ export default async function AdminPage({
 									className="field"
 									name="category"
 									list="product-categories"
-									defaultValue={selected?.category || "Merchandise"}
+									defaultValue={selectedProduct?.category || "Merchandise"}
 									required
 								/>
 							</label>
@@ -111,13 +126,13 @@ export default async function AdminPage({
 						</datalist>
 						<label>
 							Description
-							<textarea className="field" name="description" rows={5} defaultValue={selected?.description} required />
+							<textarea className="field" name="description" rows={5} defaultValue={selectedProduct?.description} required />
 						</label>
 						<label>
 							Existing image URL
-							<input className="field" name="image" defaultValue={selected?.image} />
+							<input className="field" name="image" defaultValue={selectedProduct?.image} />
 						</label>
-						<input type="hidden" name="existingImage" value={selected?.image || ""} />
+						<input type="hidden" name="existingImage" value={selectedProduct?.image || ""} />
 						<label>
 							Or upload a new image
 							<input className="field" name="imageFile" type="file" accept="image/png,image/jpeg,image/webp" />
@@ -125,15 +140,15 @@ export default async function AdminPage({
 						<div className="form-row">
 							<label>
 								Sizes, comma separated
-								<input className="field" name="sizes" defaultValue={selected?.sizes?.join(", ")} />
+								<input className="field" name="sizes" defaultValue={selectedProduct?.sizes?.join(", ")} />
 							</label>
 							<label>
 								Stock
-								<input className="field" name="stock" type="number" min="0" defaultValue={selected?.stock} />
+								<input className="field" name="stock" type="number" min="0" defaultValue={selectedProduct?.stock} />
 							</label>
 						</div>
 						<label className="consent">
-							<input name="featured" type="checkbox" defaultChecked={selected?.featured} /> Feature on home page
+							<input name="featured" type="checkbox" defaultChecked={selectedProduct?.featured} /> Feature on home page
 						</label>
 						<button className="button orange" type="submit">
 							Save product
@@ -168,6 +183,7 @@ export default async function AdminPage({
 						))}
 					</div>
 				</div>
+				)}
 			</div>
 		</section>
 	);

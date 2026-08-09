@@ -2,11 +2,16 @@ import { ArrowRight, Compass, HeartHandshake, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { ProductCard } from "@/components/product-card";
-import { contributionCopy, events, healingPowerCopy, mission } from "@/lib/data";
-import { getProducts } from "@/lib/db";
+import { contributionCopy, healingPowerCopy, mission } from "@/lib/data";
+import { getEvents, getProducts } from "@/lib/db";
 
 export default async function Home() {
-	const merchandise = (await getProducts()).filter((item) => item.category === "Merchandise" && item.featured);
+	const [products, events] = await Promise.all([getProducts(), getEvents()]);
+	const merchandise = products.filter((item) => item.category === "Merchandise" && item.featured);
+	const featuredEvents = events
+		.filter((event) => event.published && event.featured)
+		.sort((a, b) => a.sortOrder - b.sortOrder)
+		.slice(0, 3);
 	return (
 		<>
 			<section className="hero">
@@ -66,8 +71,8 @@ export default async function Home() {
 					<p className="eyebrow">In the field</p>
 					<h2 className="display section-title">The next trail starts here.</h2>
 					<div className="event-strip">
-						{events.slice(0, 3).map((event, index) => (
-							<article className="event-card" key={event.title}>
+						{featuredEvents.map((event, index) => (
+							<Link className="event-card" href={`/events/${event.slug}`} key={event.slug}>
 								<Image src={event.image} alt="" fill sizes="(max-width: 700px) 100vw, 33vw" />
 								<div className="event-number">0{index + 1}</div>
 								<div className="event-copy">
@@ -75,7 +80,7 @@ export default async function Home() {
 									<h3 className="display">{event.title}</h3>
 									<p>{event.type}</p>
 								</div>
-							</article>
+							</Link>
 						))}
 					</div>
 					<Link className="text-link" href="/adventures">

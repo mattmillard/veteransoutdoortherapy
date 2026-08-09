@@ -3,7 +3,7 @@ import { put } from "@vercel/blob";
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { isAdmin, login, logout } from "@/lib/auth";
-import { deleteProduct, getProducts, saveProduct } from "@/lib/db";
+import { deleteEvent, deleteProduct, getEvents, getProducts, saveEvent, saveProduct } from "@/lib/db";
 
 function revalidateCatalogPages(slug: string) {
 	revalidatePath("/");
@@ -16,6 +16,14 @@ function revalidateCatalogPages(slug: string) {
 	revalidatePath("/admin");
 }
 
+function revalidateEventPages(slug: string) {
+	revalidatePath("/");
+	revalidatePath("/adventures");
+	revalidatePath(`/events/${slug}`);
+	revalidatePath("/events/[slug]", "page");
+	revalidatePath("/admin");
+}
+
 function slugify(value: string) {
 	return value
 		.toLowerCase()
@@ -24,9 +32,7 @@ function slugify(value: string) {
 }
 
 function normalizeCategory(value: string) {
-	const cleaned = value
-		.trim()
-		.replace(/\s+/g, " ");
+	const cleaned = value.trim().replace(/\s+/g, " ");
 	if (!cleaned) return "Merchandise";
 	if (cleaned.toLowerCase() === "sponsorships") return "Sponsorships";
 	if (cleaned.toLowerCase() === "merchandise") return "Merchandise";
@@ -35,12 +41,24 @@ function normalizeCategory(value: string) {
 
 function safeUploadPath(slug: string, fileName: string) {
 	const safeSlug = slugify(slug).slice(0, 60) || "product";
-	const safeName = fileName
-		.toLowerCase()
-		.replace(/[^a-z0-9._-]+/g, "-")
-		.replace(/-+/g, "-")
-		.slice(-80) || "image";
+	const safeName =
+		fileName
+			.toLowerCase()
+			.replace(/[^a-z0-9._-]+/g, "-")
+			.replace(/-+/g, "-")
+			.slice(-80) || "image";
 	return `products/${safeSlug}/${Date.now()}-${safeName}`;
+}
+
+function safeEventUploadPath(slug: string, fileName: string) {
+	const safeSlug = slugify(slug).slice(0, 60) || "event";
+	const safeName =
+		fileName
+			.toLowerCase()
+			.replace(/[^a-z0-9._-]+/g, "-")
+			.replace(/-+/g, "-")
+			.slice(-80) || "image";
+	return `events/${safeSlug}/${Date.now()}-${safeName}`;
 }
 
 export async function loginAction(form: FormData) {
@@ -142,4 +160,93 @@ export async function deleteProductAction(form: FormData) {
 	const slug = String(form.get("slug") || "");
 	await deleteProduct(slug);
 	revalidateCatalogPages(slug);
+}
+
+export async function saveEventAction(form: FormData) {
+	if (!(await isAdmin())) redirect("/admin");
+	const title = String(form.get("title") || "").trim();
+	const slug = slugify(String(form.get("slug") || title));
+	const previousSlug = String(form.get("previousSlug") || slug).trim();
+	const file = form.get("imageFile");
+	const existingImage = String(form.get("existingImage") || "").trim();
+	let image = String(form.get("image") || "").trim() || existingImage;
+
+	if (file instanceof File && file.size > 0) {
+		if (!process.env.BLOB_READ_WRITE_TOKEN) redirect("/admin?view=events&saveError=upload-config");
+		try {
+			image = (await put(safeEventUploadPath(slug, file.name), file, { access: "public", addRandomSuffix: true })).url;
+		} catch (error) {
+			console.error("Event image upload failed", { slug, fileName: file.name, error });
+			redirect("/admin?view=events&saveError=upload-failed");
+		}
+	}
+
+	try {
+		if (!title || !slug || !image) throw new Error("Missing required event fields.");
+		await saveEvent(
+			{
+				slug,
+				title,
+				date: String(form.get("date") || "").trim(),
+				startDate: String(form.get("startDate") || ""),
+				endDate: String(form.get("endDate") || ""),
+				image,
+				type: String(form.get("type") || "").trim(),
+				location: String(form.get("location") || "").trim(),
+				summary: String(form.get("summary") || "").trim(),
+				heroTitle: String(form.get("heroTitle") || "").trim(),
+				overviewTitle: String(form.get("overviewTitle") || "").trim(),
+				overview: String(form.get("overview") || "").trim(),
+				detailsTitle: String(form.get("detailsTitle") || "").trim(),
+				details: String(form.get("details") || "").trim(),
+				ctaLabel: String(form.get("ctaLabel") || "").trim(),
+				ctaHref: String(form.get("ctaHref") || "").trim(),
+				template: form.get("template") === "fundraiser" ? "fundraiser" : "adventure",
+				published: form.get("published") === "on",
+				featured: form.get("featured") === "on",
+				sortOrder: Number(form.get("sortOrder") || 0),
+			},
+			previousSlug,
+		);
+	} catch (error) {
+		console.error("Event save failed", { slug, error });
+		redirect("/admin?view=events&saveError=save-failed");
+	}
+
+	revalidateEventPages(previousSlug);
+	revalidateEventPages(slug);
+	redirect(`/admin?view=events&edit=${slug}&saved=1`);
+}
+
+export async function duplicateEventAction(form: FormData) {
+	if (!(await isAdmin())) redirect("/admin");
+	const sourceSlug = String(form.get("slug") || "").trim();
+	const eventList = await getEvents();
+	const source = eventList.find((event) => event.slug === sourceSlug);
+	if (!source) redirect("/admin?view=events&saveError=save-failed");
+
+	const duplicateSlug = getDuplicateSlug(new Set(eventList.map((event) => event.slug)), source.slug);
+	try {
+		await saveEvent({
+			...source,
+			slug: duplicateSlug,
+			title: `${source.title} (Copy)`,
+			published: false,
+			featured: false,
+			sortOrder: eventList.length + 1,
+		});
+	} catch {
+		redirect("/admin?view=events&saveError=save-failed");
+	}
+
+	revalidateEventPages(duplicateSlug);
+	redirect(`/admin?view=events&edit=${duplicateSlug}&saved=1`);
+}
+
+export async function deleteEventAction(form: FormData) {
+	if (!(await isAdmin())) redirect("/admin");
+	const slug = String(form.get("slug") || "").trim();
+	await deleteEvent(slug);
+	revalidateEventPages(slug);
+	redirect("/admin?view=events&deleted=1");
 }

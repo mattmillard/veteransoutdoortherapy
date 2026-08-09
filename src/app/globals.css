@@ -480,6 +480,7 @@ img {
 	gap: 18px;
 }
 .event-card {
+	display: block;
 	min-height: 470px;
 	position: relative;
 	overflow: hidden;
@@ -1272,6 +1273,68 @@ img {
 .event-detail-grid li {
 	margin-bottom: 10px;
 }
+.event-page-hero {
+	background: var(--ink);
+	color: #fff;
+	padding: clamp(64px, 8vw, 110px) 0;
+}
+.event-page-hero.fundraiser {
+	background: var(--forest);
+}
+.event-page-hero-grid {
+	display: grid;
+	grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+	align-items: center;
+	gap: clamp(38px, 7vw, 96px);
+}
+.event-page-hero h1 {
+	margin: 12px 0 22px;
+	font-size: clamp(4rem, 8vw, 7.5rem);
+	line-height: 0.86;
+}
+.event-page-hero p:not(.eyebrow) {
+	max-width: 42rem;
+	font-size: 1.08rem;
+	line-height: 1.7;
+}
+.event-page-image {
+	position: relative;
+	min-height: 520px;
+	overflow: hidden;
+}
+.event-page-image img {
+	object-fit: cover;
+}
+.event-meta {
+	display: grid;
+	gap: 8px;
+	margin: 26px 0;
+	color: #d9ddd8;
+	font-weight: 700;
+}
+.event-meta span {
+	display: flex;
+	align-items: center;
+	gap: 9px;
+}
+.event-page-sections {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: clamp(30px, 7vw, 90px);
+}
+.event-page-sections article {
+	border-top: 4px solid var(--orange);
+	padding-top: 28px;
+}
+.event-page-sections h2 {
+	margin: 10px 0 20px;
+	font-size: clamp(2.8rem, 5vw, 4.8rem);
+}
+.event-page-sections article > p:last-child {
+	white-space: pre-line;
+	font-size: 1.05rem;
+	line-height: 1.8;
+}
 .story-copy {
 	max-width: 900px;
 }
@@ -1313,6 +1376,21 @@ img {
 	margin: 0;
 	font-size: 4rem;
 }
+.admin-tabs {
+	display: flex;
+	gap: 4px;
+	margin: -15px 0 28px;
+	border-bottom: 1px solid var(--line);
+}
+.admin-tabs a {
+	padding: 12px 18px;
+	color: var(--moss);
+	font-weight: 800;
+}
+.admin-tabs a.active {
+	border-bottom: 3px solid var(--orange);
+	color: var(--ink);
+}
 .admin-grid {
 	display: grid;
 	grid-template-columns: 1.15fr 0.85fr;
@@ -1335,7 +1413,7 @@ img {
 }
 .admin-list article {
 	display: grid;
-	grid-template-columns: 1fr 38px 38px;
+	grid-template-columns: 1fr repeat(3, 38px);
 	align-items: center;
 	gap: 8px;
 	border-top: 1px solid var(--line);
@@ -1347,6 +1425,14 @@ img {
 .admin-list span {
 	color: var(--moss);
 	font-size: 0.76rem;
+}
+.event-admin-list article {
+	grid-template-columns: 1fr repeat(4, 38px);
+}
+.admin-checks {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 20px;
 }
 .icon-button.danger {
 	color: #9d301f;
@@ -1479,8 +1565,13 @@ img {
 	.sponsor-proof > .container,
 	.application-note > .container,
 	.healing-grid,
-	.contribution-grid {
+	.contribution-grid,
+	.event-page-hero-grid,
+	.event-page-sections {
 		grid-template-columns: 1fr;
+	}
+	.event-page-image {
+		min-height: 430px;
 	}
 	.application-grid,
 	.donation-impact,
@@ -1500,6 +1591,18 @@ img {
 	}
 }
 @media (max-width: 560px) {
+	.event-page-hero h1 {
+		font-size: 3.8rem;
+	}
+	.event-page-image {
+		min-height: 300px;
+	}
+	.event-admin-list article {
+		grid-template-columns: 1fr repeat(2, 38px);
+	}
+	.event-admin-list article > div {
+		grid-column: 1 / -1;
+	}
 	.form-row,
 	.program-grid,
 	.account-actions {

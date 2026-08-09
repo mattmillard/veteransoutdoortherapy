@@ -144,31 +144,144 @@ export const products: Product[] = [
 	})),
 ];
 
-export const events = [
-	{ title: "Missouri Turkey Hunt", date: "April 30 - May 3", image: `${uploads}/2026/01/turkey.jpg`, type: "Hunt" },
+export type EventTemplate = "adventure" | "fundraiser";
+
+export type Event = {
+	slug: string;
+	title: string;
+	date: string;
+	startDate: string;
+	endDate: string;
+	image: string;
+	type: string;
+	location: string;
+	summary: string;
+	heroTitle: string;
+	overviewTitle: string;
+	overview: string;
+	detailsTitle: string;
+	details: string;
+	ctaLabel: string;
+	ctaHref: string;
+	template: EventTemplate;
+	published: boolean;
+	featured: boolean;
+	sortOrder: number;
+};
+
+const participantDetails =
+	"Details and registration information are shared with selected participants. Travel, core gear, meals, and activities are funded by our donors and sponsors.";
+
+export const events: Event[] = [
 	{
+		slug: "missouri-turkey-hunt-2026",
+		title: "Missouri Turkey Hunt",
+		date: "April 30 - May 3, 2026",
+		startDate: "2026-04-30",
+		endDate: "2026-05-03",
+		image: `${uploads}/2026/01/turkey.jpg`,
+		type: "Hunt",
+		location: "Missouri",
+		summary: "A fully supported spring turkey hunt built around time outdoors, camaraderie, and connection.",
+		heroTitle: "Find connection in the spring woods.",
+		overviewTitle: "A shared hunt with a larger purpose.",
+		overview: participantDetails,
+		detailsTitle: "What participants can expect",
+		details: "Guided time in the field, shared meals, and a welcoming group of Veterans and supporters.",
+		ctaLabel: "Apply for support",
+		ctaHref: "/apply",
+		template: "adventure",
+		published: true,
+		featured: true,
+		sortOrder: 1,
+	},
+	{
+		slug: "flint-hills-kansas-turkey-hunt-2026",
 		title: "Flint Hills, KS Turkey Hunt",
-		date: "May 14 - May 17",
+		date: "May 14 - May 17, 2026",
+		startDate: "2026-05-14",
+		endDate: "2026-05-17",
 		image: `${uploads}/2026/01/turkey2.jpg`,
 		type: "Hunt",
+		location: "Flint Hills, Kansas",
+		summary: "A fully funded turkey hunt in the Flint Hills centered on challenge, recovery, and community.",
+		heroTitle: "Head into the Flint Hills together.",
+		overviewTitle: "Open country. Shared purpose.",
+		overview: participantDetails,
+		detailsTitle: "What participants can expect",
+		details: "Time in the field, shared meals, and the support needed to focus on the experience and one another.",
+		ctaLabel: "Apply for support",
+		ctaHref: "/apply",
+		template: "adventure",
+		published: true,
+		featured: true,
+		sortOrder: 2,
 	},
 	{
-		title: "Poker Run",
-		date: "June 20",
-		image: `${uploads}/2025/10/thumbnail_IMG_4884-980x735.jpg`,
-		type: "Fundraiser",
-	},
-	{
-		title: "Coulter Lake Guest Ranch",
-		date: "July 8 - July 12",
-		image: `${uploads}/2026/01/horseback.jpg`,
-		type: "Female horseback camp",
-	},
-	{
+		slug: "rocky-point-archery-antelope-hunt-2026",
 		title: "Rocky Point Recreational Park",
-		date: "September 16 - September 20",
+		date: "September 16 - September 20, 2026",
+		startDate: "2026-09-16",
+		endDate: "2026-09-20",
 		image: `${uploads}/2025/09/552626219_122157680714799810_368606548123490962_n-980x735.jpg`,
 		type: "Archery antelope hunt",
+		location: "Rocky Point Recreational Park",
+		summary: "An archery antelope hunt that creates space for challenge, reflection, and connection in open country.",
+		heroTitle: "Take aim at a stronger connection.",
+		overviewTitle: "Five days grounded in the outdoors.",
+		overview: participantDetails,
+		detailsTitle: "What participants can expect",
+		details: "A supported archery experience, shared meals, and meaningful time with people who understand the journey.",
+		ctaLabel: "Apply for support",
+		ctaHref: "/apply",
+		template: "adventure",
+		published: true,
+		featured: true,
+		sortOrder: 3,
+	},
+	{
+		slug: "coulter-lake-guest-ranch-2026",
+		title: "Coulter Lake Guest Ranch",
+		date: "July 8 - July 12, 2026",
+		startDate: "2026-07-08",
+		endDate: "2026-07-12",
+		image: `${uploads}/2026/01/horseback.jpg`,
+		type: "Female horseback camp",
+		location: "Coulter Lake Guest Ranch",
+		summary: "A restorative horseback camp for women built around confidence, community, and time outside.",
+		heroTitle: "Ride into room to reconnect.",
+		overviewTitle: "A supported ranch experience.",
+		overview: participantDetails,
+		detailsTitle: "What participants can expect",
+		details: "Horseback riding, shared meals, and unhurried time with a community that understands.",
+		ctaLabel: "Apply for support",
+		ctaHref: "/apply",
+		template: "adventure",
+		published: true,
+		featured: false,
+		sortOrder: 4,
+	},
+	{
+		slug: "poker-run-2026",
+		title: "Poker Run",
+		date: "June 20, 2026",
+		startDate: "2026-06-20",
+		endDate: "2026-06-20",
+		image: `${uploads}/2025/10/thumbnail_IMG_4884-980x735.jpg`,
+		type: "Fundraiser",
+		location: "Columbia, Missouri",
+		summary: "A day of riding, connection, and impact in support of Veterans and Gold Star families.",
+		heroTitle: "Ride with purpose.",
+		overviewTitle: "Start and finish together.",
+		overview: "The 2nd Annual Veterans Outdoor Therapy Poker Run brought riders together for a powerful day supporting outdoor therapy programs.",
+		detailsTitle: "Every mile funded recovery.",
+		details: "Proceeds support fishing, hiking, camping, and hunting experiences that promote healing, camaraderie, and recovery.",
+		ctaLabel: "Support the mission",
+		ctaHref: "/donate",
+		template: "fundraiser",
+		published: true,
+		featured: false,
+		sortOrder: 5,
 	},
 ];
 

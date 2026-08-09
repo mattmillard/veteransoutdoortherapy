@@ -1,7 +1,8 @@
 import type { MetadataRoute } from "next";
-import { products } from "@/lib/data";
-export default function sitemap(): MetadataRoute.Sitemap {
+import { getEvents, getProducts } from "@/lib/db";
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 	const base = process.env.NEXT_PUBLIC_SITE_URL || "https://veteransoutdoortherapy.org";
+	const [products, events] = await Promise.all([getProducts(), getEvents()]);
 	const routes = [
 		"",
 		"/about",
@@ -33,5 +34,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
 			changeFrequency: "weekly" as const,
 			priority: 0.6,
 		})),
+		...events
+			.filter((event) => event.published)
+			.map((event) => ({
+				url: `${base}/events/${event.slug}`,
+				changeFrequency: "weekly" as const,
+				priority: 0.7,
+			})),
 	];
 }

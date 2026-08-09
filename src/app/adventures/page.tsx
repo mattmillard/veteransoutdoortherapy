@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { events } from "@/lib/data";
+import { getEvents } from "@/lib/db";
 export const metadata: Metadata = { title: "Outdoor Adventures" };
-export default function AdventuresPage() {
+export default async function AdventuresPage() {
+	const events = (await getEvents())
+		.filter((event) => event.published)
+		.sort((a, b) => a.sortOrder - b.sortOrder);
 	return (
 		<>
 			<section className="page-hero">
@@ -20,7 +23,7 @@ export default function AdventuresPage() {
 			<section className="section">
 				<div className="container adventure-list">
 					{events.map((event, index) => (
-						<article key={event.title}>
+						<article key={event.slug}>
 							<div className="adventure-image">
 								<Image src={event.image} alt={event.title} fill sizes="(max-width: 760px) 100vw, 45vw" />
 							</div>
@@ -29,12 +32,9 @@ export default function AdventuresPage() {
 								<p className="eyebrow">{event.type}</p>
 								<h2 className="display">{event.title}</h2>
 								<strong>{event.date}</strong>
-								<p>
-									Details and registration information are shared with selected participants. Travel, core gear, meals,
-									and activities are funded by our donors and sponsors.
-								</p>
-								<Link className="button" href="/apply">
-									Apply for support
+								<p>{event.summary}</p>
+								<Link className="button" href={`/events/${event.slug}`}>
+									View event details
 								</Link>
 							</div>
 						</article>
