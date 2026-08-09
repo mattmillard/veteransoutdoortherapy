@@ -3,18 +3,32 @@ import sharp from "sharp";
 const canvasWidth = 2500;
 const canvasHeight = 600;
 const mark = await sharp("public/vot-mark.png")
-	.resize({ width: 780, height: 390, fit: "contain" })
+	.trim()
+	.resize({
+		width: 690,
+		height: 360,
+		fit: "contain",
+		background: { r: 0, g: 0, b: 0, alpha: 0 },
+	})
 	.png()
 	.toBuffer();
 
-const wordmark = Buffer.from(`
-	<svg width="${canvasWidth}" height="${canvasHeight}" xmlns="http://www.w3.org/2000/svg">
-		<g fill="#050505" stroke="#050505" stroke-width="1" font-family="Rockwell, serif" font-weight="400">
-			<text x="900" y="270" font-size="176" letter-spacing="4">VETERAN'S</text>
-			<text x="900" y="440" font-size="138" letter-spacing="4">OUTDOOR THERAPY</text>
-		</g>
-	</svg>
-`);
+async function renderLine(text, fontSize, tracking) {
+	const line = Buffer.from(`
+		<svg width="2200" height="240" xmlns="http://www.w3.org/2000/svg">
+			<text x="10" y="190" fill="#050505" font-family="Rockwell, serif" font-size="${fontSize}" font-weight="400" letter-spacing="${tracking}">${text}</text>
+		</svg>
+	`);
+
+	return sharp(line)
+		.trim()
+		.resize({ width: 1430, fit: "fill" })
+		.png()
+		.toBuffer();
+}
+
+const veteranLine = await renderLine("VETERAN'S", 170, 10);
+const outdoorTherapyLine = await renderLine("OUTDOOR THERAPY", 126, 4);
 
 await sharp({
 	create: {
@@ -25,8 +39,9 @@ await sharp({
 	},
 })
 	.composite([
-		{ input: mark, left: 60, top: 105 },
-		{ input: wordmark, left: 0, top: 0 },
+		{ input: mark, left: 70, top: 120 },
+		{ input: veteranLine, left: 830, top: 120 },
+		{ input: outdoorTherapyLine, left: 830, top: 320 },
 	])
 	.png()
 	.toFile("public/vot-logo-navigation.png");
