@@ -388,7 +388,7 @@ img {
 .hero h1 {
 	max-width: 850px;
 	margin: 14px 0 24px;
-	font-size: clamp(4rem, 10vw, 8.8rem);
+	font-size: clamp(4rem, 10vw, 8rem);
 }
 .hero-content > p:not(.eyebrow) {
 	max-width: 42rem;

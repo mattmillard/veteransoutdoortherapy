@@ -36,7 +36,9 @@ export function ProductCatalog({ products }: { products: Product[] }) {
 
 	const filtered = useMemo(() => {
 		if (activeTab === "all") return products;
-		return products.filter((product) => normalize(product.category) === activeTab);
+		const categoryProducts = products.filter((product) => normalize(product.category) === activeTab);
+		if (activeTab === "sponsorships") return categoryProducts.sort((a, b) => b.price - a.price);
+		return categoryProducts;
 	}, [activeTab, products]);
 
 	return (
