@@ -1391,6 +1391,9 @@ img {
 .sponsor-hero {
 	background: #253d2c;
 }
+.sponsor-hero .button {
+	margin-top: 24px;
+}
 .program-grid {
 	display: grid;
 	grid-template-columns: repeat(4, 1fr);
