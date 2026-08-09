@@ -82,11 +82,13 @@ export function Header() {
 								<ChevronDown size={15} />
 							</summary>
 							<div className="nav-dropdown">
-								{group.links.map(([label, href]) => (
-									<Link key={href} href={href} onClick={closeNavigation}>
-										{label}
-									</Link>
-								))}
+								<div className="nav-dropdown-panel">
+									{group.links.map(([label, href]) => (
+										<Link key={href} href={href} onClick={closeNavigation}>
+											{label}
+										</Link>
+									))}
+								</div>
 							</div>
 						</details>
 					))}
