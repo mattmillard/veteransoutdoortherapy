@@ -34,8 +34,12 @@ const groups = [
 export function Header() {
 	const pathname = usePathname();
 	const [openPath, setOpenPath] = useState<string | null>(null);
+	const [openGroup, setOpenGroup] = useState<string | null>(null);
 	const open = openPath === pathname;
-	const closeNavigation = () => setOpenPath(null);
+	const closeNavigation = () => {
+		setOpenPath(null);
+		setOpenGroup(null);
+	};
 	const { count } = useCart();
 	return (
 		<>
@@ -56,8 +60,13 @@ export function Header() {
 				</Link>
 				<nav key={pathname} className={open ? "nav open" : "nav"} aria-label="Main navigation">
 					{groups.map((group) => (
-						<details className="nav-group" key={group.label}>
-							<summary>
+						<details className="nav-group" key={group.label} open={openGroup === group.label}>
+							<summary
+								onClick={(event) => {
+									event.preventDefault();
+									setOpenGroup((current) => (current === group.label ? null : group.label));
+								}}
+							>
 								{group.label}
 								<ChevronDown size={15} />
 							</summary>
