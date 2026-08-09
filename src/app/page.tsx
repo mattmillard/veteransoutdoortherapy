@@ -83,7 +83,7 @@ export default async function Home() {
 							</Link>
 						))}
 					</div>
-					<Link className="text-link" href="/adventures">
+					<Link className="text-link" href="/events">
 						View all adventures <ArrowRight size={17} />
 					</Link>
 				</div>

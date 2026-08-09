@@ -1,5 +1,8 @@
-import { ArrowRight, BedDouble, Fuel, UtensilsCrossed } from "lucide-react";
+import { ArrowDown, BedDouble, Fuel, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
+
+const zeffyFormUrl =
+	"https://www.zeffy.com/en-US/donation-form/make-an-impact-on-the-lives-of-our-american-heroes-and-gold-star-families";
 
 const impact = [
 	{
@@ -38,12 +41,39 @@ export default function DonatePage() {
 						families space to reconnect and heal outside.
 					</p>
 					<div className="hero-actions">
-						<Link className="button orange" href="/product/custom-sponsor">
-							Make a donation <ArrowRight size={18} />
+						<Link className="button orange" href="#donation-form">
+							Make a donation <ArrowDown size={18} />
 						</Link>
 						<Link className="button hero-secondary" href="/sponsorships">
 							Explore sponsorships
 						</Link>
+					</div>
+				</div>
+			</section>
+			<section className="section donation-form-section" id="donation-form">
+				<div className="container donation-form-layout">
+					<div>
+						<p className="eyebrow">Secure online giving</p>
+						<h2 className="display section-title">Make an impact today.</h2>
+						<p className="prose">
+							Choose an amount and complete your donation securely through Zeffy. Your contribution directly supports
+							fully funded outdoor experiences for Veterans and Gold Star families.
+						</p>
+					</div>
+					<div className="zeffy-shell">
+						<iframe
+							title="Donation form powered by Zeffy"
+							src={zeffyFormUrl}
+							allow="payment"
+							loading="eager"
+							referrerPolicy="strict-origin-when-cross-origin"
+						/>
+						<p className="embed-fallback">
+							Having trouble with the embedded form?{" "}
+							<a href={zeffyFormUrl} target="_blank" rel="noreferrer">
+								Open Zeffy in a new tab.
+							</a>
+						</p>
 					</div>
 				</div>
 			</section>
@@ -65,21 +95,6 @@ export default function DonatePage() {
 							</article>
 						))}
 					</div>
-				</div>
-			</section>
-			<section className="giving-band">
-				<div className="container">
-					<div>
-						<p className="eyebrow">Give with confidence</p>
-						<h2 className="display">No gift is too small.</h2>
-					</div>
-					<p>
-						Every contribution supports the travel, meals, equipment, and coordination behind our outdoor programs.
-						Secure payment is processed through PayPal.
-					</p>
-					<Link className="button orange" href="/product/custom-sponsor">
-						Donate securely
-					</Link>
 				</div>
 			</section>
 		</>

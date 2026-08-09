@@ -13,7 +13,7 @@ export default function RafflePage() {
 					Tickets were $20 for three chances to win. The drawing took place March 13, 2026 at the Wilderness to Wellness
 					benefit dinner. All state and federal firearm regulations apply.
 				</p>
-				<Link className="button orange" href="/adventures">
+				<Link className="button orange" href="/events">
 					See upcoming events
 				</Link>
 			</div>

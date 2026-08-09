@@ -18,7 +18,7 @@ export function Footer() {
 				<div>
 					<h3>Explore</h3>
 					<Link href="/about">Our mission</Link>
-					<Link href="/adventures">Adventures</Link>
+					<Link href="/events">Adventures</Link>
 					<Link href="/gallery">Field gallery</Link>
 				</div>
 				<div>

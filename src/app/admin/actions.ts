@@ -18,7 +18,7 @@ function revalidateCatalogPages(slug: string) {
 
 function revalidateEventPages(slug: string) {
 	revalidatePath("/");
-	revalidatePath("/adventures");
+	revalidatePath("/events");
 	revalidatePath(`/events/${slug}`);
 	revalidatePath("/events/[slug]", "page");
 	revalidatePath("/admin");

@@ -10,7 +10,7 @@ const groups = [
 	{
 		label: "Events",
 		links: [
-			["All events", "/adventures"],
+			["All events", "/events"],
 			["Get involved", "/application"],
 		],
 	},
