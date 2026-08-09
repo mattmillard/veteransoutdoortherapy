@@ -2,6 +2,7 @@ import { ArrowRight, Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getProducts } from "@/lib/db";
+import { sponsorLogos } from "@/lib/sponsors";
 import type { Metadata } from "next";
 export const metadata: Metadata = {
 	title: "Sponsorships",
@@ -53,15 +54,6 @@ const customTier = {
 		"Personal planning with our team",
 	],
 };
-const sponsorLogos = [
-	["Untitled-1.png", "Gold sponsor"],
-	["e4b1af3f420790253992f4b4ff4c7d45.png", "Gold sponsor"],
-	["81bb564d97c4a018a6409675a3e93607.png", "Silver sponsor"],
-	["5552f32b6ad1eae2ff185d54ec00536d.png", "Silver sponsor"],
-	["5fb0f072328b8fe67db2cb5d738a0b60.png", "Bronze sponsor"],
-	["df1493138d91fc375c9ea19053935c54.png", "Bronze sponsor"],
-	["b34fb4cc05499823ae90889743203e80.png", "Parker County Gold Star Families"],
-];
 const sponsorEvents = [
 	{
 		title: "Poker Run",
@@ -152,9 +144,9 @@ export default async function SponsorPage() {
 					<p className="eyebrow">With gratitude</p>
 					<h2 className="display section-title">2025 Sponsors</h2>
 					<div className="sponsor-logos">
-						{sponsorLogos.map(([file, name]) => (
-							<figure key={file}>
-								<Image src={`${uploads}/2025/10/${file}`} alt={name} fill sizes="(max-width: 600px) 50vw, 20vw" />
+						{sponsorLogos.map((sponsor) => (
+							<figure key={sponsor.image}>
+								<Image src={sponsor.image} alt={sponsor.name} fill sizes="(max-width: 600px) 50vw, 20vw" />
 							</figure>
 						))}
 					</div>

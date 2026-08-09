@@ -529,6 +529,43 @@ img {
 .event-copy p {
 	margin: 0;
 }
+.sponsor-badge-band {
+	border-block: 1px solid var(--line);
+	background: #dfe2d9;
+	padding: 42px 0 48px;
+}
+.sponsor-badge-heading {
+	display: flex;
+	align-items: flex-end;
+	justify-content: space-between;
+	gap: 30px;
+	margin-bottom: 24px;
+}
+.sponsor-badge-heading h2 {
+	margin: 4px 0 0;
+	font-size: clamp(2.4rem, 4vw, 3.6rem);
+}
+.sponsor-badge-heading .text-link {
+	flex: none;
+	margin: 0 0 6px;
+}
+.sponsor-badge-grid {
+	display: grid;
+	grid-template-columns: repeat(6, minmax(0, 1fr));
+	gap: 1px;
+	border: 1px solid var(--line);
+	background: var(--line);
+}
+.sponsor-badge-grid figure {
+	position: relative;
+	height: 132px;
+	margin: 0;
+	background: #fff;
+}
+.sponsor-badge-grid img {
+	object-fit: contain;
+	padding: clamp(14px, 2vw, 24px);
+}
 .text-link,
 .back-link {
 	display: inline-flex;
@@ -1702,6 +1739,9 @@ img {
 	}
 }
 @media (max-width: 900px) {
+	.sponsor-badge-grid {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
 	.giving-band > .container,
 	.sponsor-proof > .container,
 	.application-note > .container,
@@ -1732,6 +1772,20 @@ img {
 	}
 }
 @media (max-width: 560px) {
+	.sponsor-badge-heading {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 12px;
+	}
+	.sponsor-badge-heading .text-link {
+		margin: 0;
+	}
+	.sponsor-badge-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+	.sponsor-badge-grid figure {
+		height: 116px;
+	}
 	.gallery-lightbox {
 		width: 100vw;
 		height: 100dvh;

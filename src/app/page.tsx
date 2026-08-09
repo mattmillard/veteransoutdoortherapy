@@ -4,6 +4,9 @@ import Link from "next/link";
 import { ProductCard } from "@/components/product-card";
 import { contributionCopy, healingPowerCopy, mission } from "@/lib/data";
 import { getEvents, getProducts } from "@/lib/db";
+import { sponsorLogos } from "@/lib/sponsors";
+
+const homepageSponsors = sponsorLogos.filter((sponsor) => sponsor.featured);
 
 export default async function Home() {
 	const [products, events] = await Promise.all([getProducts(), getEvents()]);
@@ -86,6 +89,28 @@ export default async function Home() {
 					<Link className="text-link" href="/events">
 						View all adventures <ArrowRight size={17} />
 					</Link>
+				</div>
+			</section>
+			<section className="sponsor-badge-band" aria-labelledby="homepage-sponsors-title">
+				<div className="container">
+					<div className="sponsor-badge-heading">
+						<div>
+							<p className="eyebrow">Mission partners</p>
+							<h2 className="display" id="homepage-sponsors-title">
+								Proudly supported by.
+							</h2>
+						</div>
+						<Link className="text-link" href="/sponsorships">
+							Become a sponsor <ArrowRight size={17} />
+						</Link>
+					</div>
+					<div className="sponsor-badge-grid">
+						{homepageSponsors.map((sponsor) => (
+							<figure key={sponsor.image}>
+								<Image src={sponsor.image} alt={sponsor.name} fill sizes="(max-width: 560px) 50vw, 17vw" />
+							</figure>
+						))}
+					</div>
 				</div>
 			</section>
 			<section className="impact">
