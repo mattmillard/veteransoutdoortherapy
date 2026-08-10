@@ -9,7 +9,7 @@ const uploads = "https://veteransoutdoortherapy.org/wp-content/uploads";
 
 const opportunities = [
 	{
-		title: "Wilderness to Wellness Benefit Dinner",
+		title: "Annual Benefit Dinner",
 		month: 2,
 		monthLabel: "March",
 		image: `${uploads}/2025/09/511570233_122138280608799810_3062368554634141654_n.jpg`,
