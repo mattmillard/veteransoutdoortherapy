@@ -1,11 +1,17 @@
 import { IntakeForm } from "@/components/intake-form";
+import { pageMetadata } from "@/lib/site";
+export const metadata = pageMetadata({
+	title: "Contact Veteran's Outdoor Therapy",
+	description: "Contact Veteran's Outdoor Therapy about applications, outdoor program hosting, nonprofit sponsorships, volunteering, merchandise, or media requests.",
+	path: "/contact",
+});
 export default function ContactPage() {
 	return (
 		<section className="section">
 			<div className="container form-layout">
 				<div>
 					<p className="eyebrow">Reach our team</p>
-					<h1 className="display section-title">Let&apos;s talk.</h1>
+					<h1 className="display section-title">Contact Veteran&apos;s Outdoor Therapy.</h1>
 					<p>
 						Email{" "}
 						<a className="text-link" href="mailto:contact@veteransoutdoortherapy.org">

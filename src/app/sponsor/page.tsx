@@ -1,13 +1,16 @@
 import { ArrowRight, Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { JsonLd } from "@/components/json-ld";
 import { getProducts } from "@/lib/db";
+import { breadcrumbSchema, faqSchema, pageMetadata } from "@/lib/site";
 import { sponsorLogos } from "@/lib/sponsors";
-import type { Metadata } from "next";
-export const metadata: Metadata = {
-	title: "Sponsorships",
-	alternates: { canonical: "/sponsorships" },
-};
+export const metadata = pageMetadata({
+	title: "Sponsor Outdoor Programs for Veterans",
+	description: "Fund travel, lodging, meals, gear, guides, and field access for Veteran and Gold Star family outdoor experiences through a nonprofit sponsorship.",
+	path: "/sponsorships",
+});
 const uploads = "https://veteransoutdoortherapy.org/wp-content/uploads";
 const tierDetails: Record<string, { tagline: string; benefits: string[] }> = {
 	"bronze-sponsor": {
@@ -74,23 +77,42 @@ const sponsorEvents = [
 		copy: "Help make a fully supported archery antelope hunt possible in South Dakota.",
 	},
 ];
+const sponsorFaqs = [
+	{
+		question: "What does a nonprofit sponsorship fund?",
+		answer: "Sponsorships help cover practical program costs such as travel, lodging, meals, field access, guides, equipment, and activity expenses for selected Veterans and Gold Star family participants.",
+	},
+	{
+		question: "Can a business sponsor a specific hunt or event?",
+		answer: "Yes. Businesses and organizations can ask about supporting a specific scheduled experience or building a custom partnership around a program need, event, service, or location.",
+	},
+	{
+		question: "Are in-kind contributions accepted?",
+		answer: "Potential partners can offer land access, lodging, transportation, meals, equipment, professional expertise, event services, or other in-kind support. The team reviews each offer against current program needs.",
+	},
+	{
+		question: "How are mission partners recognized?",
+		answer: "Recognition can include the website, event materials, social media, and event participation depending on the partnership. Custom arrangements are discussed directly so expectations are clear.",
+	},
+];
 export default async function SponsorPage() {
 	const levels = (await getProducts())
 		.filter((item) => item.category === "Sponsorships" && item.slug !== "custom-sponsor")
 		.sort((a, b) => a.price - b.price);
 	return (
 		<>
+			<JsonLd data={[
+				breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Sponsorships", path: "/sponsorships" }]),
+				faqSchema(sponsorFaqs),
+			]} />
 			<section className="page-hero sponsor-hero">
 				<div className="container">
+					<Breadcrumbs light items={[{ label: "Home", href: "/" }, { label: "Sponsorships" }]} />
 					<p className="eyebrow">Empower our heroes through nature</p>
-					<h1 className="display">
-						Join Our Mission to
-						<br />
-						Heal Veterans Outdoors
-					</h1>
+					<h1 className="display">Put your organization behind a fully funded outdoor experience.</h1>
 					<p>
-						Discover how your sponsorship can transform the lives of veterans through outdoor therapy. Your support is
-						crucial in providing healing experiences in nature.
+						Support the travel, lodging, meals, gear, field access, and shared time behind outdoor programs for
+						previously deployed Veterans and Gold Star families.
 					</p>
 					<Link className="button orange" href="#tiers">
 						Explore sponsorships
@@ -160,7 +182,7 @@ export default async function SponsorPage() {
 						{sponsorEvents.map((event) => (
 							<article key={event.title}>
 								<div className="sponsor-event-image">
-									<Image src={event.image} alt="" fill sizes="(max-width: 800px) 100vw, 33vw" />
+									<Image src={event.image} alt={`${event.title} sponsorship opportunity`} fill sizes="(max-width: 800px) 100vw, 33vw" />
 								</div>
 								<span>{event.date}</span>
 								<h3 className="display">{event.title}</h3>
@@ -173,6 +195,15 @@ export default async function SponsorPage() {
 					</div>
 				</div>
 			</section>
+			<section className="section faq-section">
+				<div className="container">
+					<p className="eyebrow">Partnership questions</p>
+					<h2 className="display section-title">Build support around real program needs.</h2>
+					<div className="faq-grid">
+						{sponsorFaqs.map((faq) => <article key={faq.question}><h3>{faq.question}</h3><p>{faq.answer}</p></article>)}
+					</div>
+				</div>
+			</section>
 			<section className="giving-band">
 				<div className="container">
 					<div>
@@ -180,8 +211,8 @@ export default async function SponsorPage() {
 						<h2 className="display">Your support changes lives.</h2>
 					</div>
 					<p>
-						Your support can make a significant difference in the lives of veterans. Apply for a sponsorship or donate
-						now to help us continue our mission of healing through outdoor therapy.
+						Your support helps make carefully hosted outdoor experiences available to Veterans and Gold Star families.
+						Choose a sponsorship level or contact the team to build a partnership around a specific need.
 					</p>
 					<Link className="button orange" href="/product/custom-sponsor">
 						Become a sponsor

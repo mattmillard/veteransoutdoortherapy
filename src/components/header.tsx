@@ -4,29 +4,25 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import { SITE_NAME } from "@/lib/site";
 import { useCart } from "./cart-provider";
 
 const groups = [
 	{
-		label: "Events",
+		label: "Programs",
 		links: [
-			["All events", "/events"],
-			["Get involved", "/application"],
+			["All programs", "/programs"],
+			["Veteran hunting", "/programs/veteran-hunting"],
+			["Gold Star families", "/gold-star-families"],
 		],
 	},
 	{
 		label: "About",
 		links: [
 			["Our mission", "/about"],
+			["Our team", "/team"],
 			["Gallery", "/gallery"],
-			["Contact", "/contact-7"],
-		],
-	},
-	{
-		label: "Shop",
-		links: [
-			["Merchandise", "/product-category/merchandise"],
-			["All products", "/products"],
+			["Contact", "/contact"],
 		],
 	},
 ];
@@ -48,11 +44,11 @@ export function Header() {
 				Fully funded adventures for Veterans and Gold Star families <Link href="/application">Apply now</Link>
 			</div>
 			<header className="site-header">
-				<Link className="brand" href="/" aria-label="Veterans Outdoor Therapy home" onClick={closeNavigation}>
+				<Link className="brand" href="/" aria-label={`${SITE_NAME} home`} onClick={closeNavigation}>
 					<Image
 						className="brand-logo"
 						src="/vot-logo-original.png"
-						alt="Veterans Outdoor Therapy"
+						alt={SITE_NAME}
 						width={799}
 						height={550}
 						priority
@@ -94,6 +90,15 @@ export function Header() {
 					))}
 					<Link href="/sponsorships" onClick={closeNavigation}>
 						Sponsorships
+					</Link>
+					<Link href="/events" onClick={closeNavigation}>
+						Events
+					</Link>
+					<Link href="/shop" onClick={closeNavigation}>
+						Shop
+					</Link>
+					<Link href="/application" onClick={closeNavigation}>
+						Apply
 					</Link>
 					<Link className="give" href="/donate" onClick={closeNavigation}>
 						Donate

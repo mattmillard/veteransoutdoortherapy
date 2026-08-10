@@ -1,19 +1,19 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { mission } from "@/lib/data";
-export const metadata: Metadata = { title: "Our Mission" };
+import { pageMetadata } from "@/lib/site";
+export const metadata = pageMetadata({
+	title: "About Veteran's Outdoor Therapy",
+	description: "Meet the 501(c)(3) nonprofit creating outdoor experiences where previously deployed Veterans and Gold Star families can reconnect and build community.",
+	path: "/about",
+});
 export default function AboutPage() {
 	return (
 		<>
 			<section className="page-hero">
 				<div className="container">
 					<p className="eyebrow">Built for those who served</p>
-					<h1 className="display">
-						Nature makes
-						<br />
-						room to heal.
-					</h1>
+					<h1 className="display">Our mission is built around service, nature, and shared experience.</h1>
 				</div>
 			</section>
 			<section className="section">
@@ -22,9 +22,11 @@ export default function AboutPage() {
 						<p className="eyebrow">Our mission</p>
 						<h2 className="display section-title">Honor in motion.</h2>
 						<p className="prose">{mission}</p>
-						<Link className="button orange" href="/apply">
+						<Link className="button orange" href="/application">
 							Take the next step
 						</Link>
+						<Link className="text-link" href="/programs">Explore outdoor programs</Link>
+						<Link className="text-link" href="/team">Meet the team</Link>
 					</div>
 					<div className="story-image">
 						<Image

@@ -1,4 +1,4 @@
-# Veterans Outdoor Therapy
+# Veteran's Outdoor Therapy
 
 A Vercel-ready nonprofit and ecommerce site built with Next.js 16, React 19, Neon Postgres, Vercel Blob, and PayPal Checkout.
 

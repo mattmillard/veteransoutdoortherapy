@@ -4,7 +4,14 @@ import Link from "next/link";
 import { ProductCard } from "@/components/product-card";
 import { contributionCopy, healingPowerCopy, mission } from "@/lib/data";
 import { getEvents, getProducts } from "@/lib/db";
+import { pageMetadata } from "@/lib/site";
 import { sponsorLogos } from "@/lib/sponsors";
+
+export const metadata = pageMetadata({
+	title: "Veteran's Outdoor Therapy | Fully Funded Outdoor Experiences",
+	description: "Veteran's Outdoor Therapy creates fully funded hunting, fishing, horseback riding, and outdoor experiences for previously deployed Veterans and Gold Star families.",
+	path: "/",
+});
 
 const homepageSponsors = sponsorLogos.filter((sponsor) => sponsor.featured);
 
@@ -21,11 +28,7 @@ export default async function Home() {
 				<div className="hero-shade" />
 				<div className="container hero-content">
 					<p className="eyebrow">Honoring Our Nation&apos;s Heroes</p>
-					<h1 className="display">
-						Open country.
-						<br />
-						Stronger bonds.
-					</h1>
+					<h1 className="display">Fully funded outdoor experiences for Veterans and Gold Star families.</h1>
 					<p>
 						Fully funded outdoor adventures where Veterans and Gold Star families can reconnect, recover, and feel the
 						strength of community.
@@ -76,7 +79,7 @@ export default async function Home() {
 					<div className="event-strip">
 						{featuredEvents.map((event, index) => (
 							<Link className="event-card" href={`/events/${event.slug}`} key={event.slug}>
-								<Image src={event.image} alt="" fill sizes="(max-width: 700px) 100vw, 33vw" />
+								<Image src={event.image} alt={`${event.type} at ${event.location}`} fill sizes="(max-width: 700px) 100vw, 33vw" />
 								<div className="event-number">0{index + 1}</div>
 								<div className="event-copy">
 									<span>{event.date}</span>
@@ -88,6 +91,9 @@ export default async function Home() {
 					</div>
 					<Link className="text-link" href="/events">
 						View all adventures <ArrowRight size={17} />
+					</Link>
+					<Link className="text-link" href="/field-stories">
+						Read stories from the field <ArrowRight size={17} />
 					</Link>
 				</div>
 			</section>

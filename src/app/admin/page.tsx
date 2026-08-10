@@ -1,8 +1,11 @@
 import { Copy, LockKeyhole, LogOut, PackagePlus, Pencil } from "lucide-react";
 import { isAdmin } from "@/lib/auth";
 import { getEvents, getProducts } from "@/lib/db";
+import { pageMetadata } from "@/lib/site";
 import { deleteProductAction, duplicateProductAction, loginAction, logoutAction, saveProductAction } from "./actions";
 import { EventAdmin } from "./event-admin";
+
+export const metadata = pageMetadata({ title: "Content Admin", description: "Authorized content administration.", path: "/admin", noIndex: true });
 
 export default async function AdminPage({
 	searchParams,

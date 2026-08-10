@@ -1,21 +1,62 @@
 import { ArrowLeft, PackageCheck, ShieldCheck, Truck } from "lucide-react";
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { AddToCart } from "@/components/add-to-cart";
+import { Breadcrumbs } from "@/components/breadcrumbs";
+import { JsonLd } from "@/components/json-ld";
 import { products } from "@/lib/data";
 import { getProducts } from "@/lib/db";
+import { absoluteUrl, breadcrumbSchema, pageMetadata, SITE_NAME, SITE_URL } from "@/lib/site";
 export function generateStaticParams() {
 	return products.map(({ slug }) => ({ slug }));
+}
+export async function generateMetadata({ params }: PageProps<"/product/[slug]">): Promise<Metadata> {
+	const { slug } = await params;
+	const product = (await getProducts()).find((item) => item.slug === slug);
+	if (!product) return {};
+	const isSponsorship = product.category === "Sponsorships";
+	return pageMetadata({
+		title: product.name,
+		description: product.description,
+		path: isSponsorship ? "/sponsorships" : `/product/${product.slug}`,
+		image: product.image,
+		noIndex: isSponsorship,
+	});
 }
 export default async function ProductPage({ params }: { params: Promise<{ slug: string }> }) {
 	const { slug } = await params;
 	const product = (await getProducts()).find((item) => item.slug === slug);
 	if (!product) notFound();
+	const isSponsorship = product.category === "Sponsorships";
+	const path = `/product/${product.slug}`;
+	const productSchema = {
+		"@context": "https://schema.org",
+		"@type": "Product",
+		name: product.name,
+		description: product.description,
+		image: [product.image, ...product.gallery],
+		url: absoluteUrl(path),
+		brand: { "@type": "Brand", name: SITE_NAME },
+		offers: {
+			"@type": "Offer",
+			price: product.price,
+			priceCurrency: "USD",
+			availability: product.stock === 0 ? "https://schema.org/OutOfStock" : "https://schema.org/InStock",
+			url: absoluteUrl(path),
+			seller: { "@id": `${SITE_URL}/#organization`, name: SITE_NAME },
+		},
+	};
 	return (
 		<section className="section product-page">
+			{!isSponsorship && <JsonLd data={[
+				breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Shop", path: "/shop" }, { name: product.shortName, path }]),
+				productSchema,
+			]} />}
 			<div className="container">
-				<Link className="back-link" href={product.category === "Merchandise" ? "/shop" : "/sponsor"}>
+				<Breadcrumbs items={[{ label: "Home", href: "/" }, { label: isSponsorship ? "Sponsorships" : "Shop", href: isSponsorship ? "/sponsorships" : "/shop" }, { label: product.shortName }]} />
+				<Link className="back-link" href={product.category === "Merchandise" ? "/shop" : "/sponsorships"}>
 					<ArrowLeft size={17} /> Back
 				</Link>
 				<div className="product-detail">

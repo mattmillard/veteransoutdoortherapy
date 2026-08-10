@@ -52,11 +52,11 @@ export function GalleryLightbox({ images }: { images: string[] }) {
 							triggerRef.current = event.currentTarget;
 							setSelectedIndex(index);
 						}}
-						aria-label={`Open field experience photo ${index + 1} of ${images.length}`}
+						aria-label={`Open Veteran's Outdoor Therapy field experience photo ${index + 1} of ${images.length}`}
 					>
 						<Image
 							src={image}
-							alt={`Veterans Outdoor Therapy field experience ${index + 1}`}
+							alt={`Veteran's Outdoor Therapy field experience ${index + 1}`}
 							fill
 							sizes="(max-width: 700px) 100vw, 40vw"
 						/>
@@ -84,7 +84,7 @@ export function GalleryLightbox({ images }: { images: string[] }) {
 						<div className="gallery-lightbox-image">
 							<Image
 								src={images[selectedIndex]}
-								alt={`Veterans Outdoor Therapy field experience ${selectedIndex + 1}`}
+								alt={`Veteran's Outdoor Therapy field experience ${selectedIndex + 1}`}
 								fill
 								priority
 								sizes="95vw"

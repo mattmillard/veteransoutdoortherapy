@@ -1,10 +1,16 @@
 import Image from "next/image";
+import { pageMetadata } from "@/lib/site";
+export const metadata = pageMetadata({
+	title: "Veteran's Outdoor Therapy Leadership and Team",
+	description: "Meet the volunteers and leaders who plan fully funded outdoor experiences for previously deployed Veterans and Gold Star families.",
+	path: "/team",
+});
 export default function TeamPage() {
 	return (
 		<section className="section">
 			<div className="container">
 				<p className="eyebrow">The people behind the mission</p>
-				<h1 className="display section-title">Led with purpose.</h1>
+				<h1 className="display section-title">Meet the people responsible for the mission.</h1>
 				<p className="prose">
 					Our team includes Veterans and passionate outdoor advocates who coordinate every trip, partner, and detail
 					behind the scenes.

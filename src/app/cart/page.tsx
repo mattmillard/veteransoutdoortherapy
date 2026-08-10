@@ -1,4 +1,6 @@
 import { Checkout } from "@/components/checkout";
+import { pageMetadata } from "@/lib/site";
+export const metadata = pageMetadata({ title: "Your Cart", description: "Review merchandise in your cart before checkout.", path: "/cart", noIndex: true });
 export default function CartPage() {
 	return (
 		<section className="section">

@@ -1,17 +1,17 @@
 import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
+export const metadata = pageMetadata({
+	title: "Wilderness to Wellness Benefit",
+	description: "Learn about the Wilderness to Wellness benefit supporting outdoor experiences for previously deployed Veterans and Gold Star families.",
+	path: "/wilderness-to-wellness",
+});
 export default function WellnessPage() {
 	return (
 		<>
 			<section className="page-hero">
 				<div className="container">
 					<p className="eyebrow">Wilderness to Wellness</p>
-					<h1 className="display">
-						Honoring our past.
-						<br />
-						Healing in the present.
-						<br />
-						Hope for the future.
-					</h1>
+					<h1 className="display">Wilderness to Wellness.</h1>
 					<p>
 						Join us for an evening that celebrates the power of nature, community, and resilience. Wilderness to
 						Wellness is more than a banquet — it&apos;s a journey through stories of service, healing, and hope.

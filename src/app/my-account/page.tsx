@@ -1,5 +1,7 @@
 import { CircleHelp, Mail, ShoppingBag } from "lucide-react";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
+export const metadata = pageMetadata({ title: "Order Help", description: "Get help with a Veteran's Outdoor Therapy merchandise order.", path: "/my-account", noIndex: true });
 export default function AccountPage() {
 	return (
 		<section className="section">

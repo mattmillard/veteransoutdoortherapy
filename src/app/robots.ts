@@ -1,5 +1,8 @@
 import type { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/site";
 export default function robots(): MetadataRoute.Robots {
-	const base = process.env.NEXT_PUBLIC_SITE_URL || "https://veteransoutdoortherapy.org";
-	return { rules: { userAgent: "*", allow: "/", disallow: ["/admin", "/api"] }, sitemap: `${base}/sitemap.xml` };
+	return {
+		rules: { userAgent: "*", allow: "/", disallow: ["/admin", "/api"] },
+		sitemap: `${SITE_URL}/sitemap.xml`,
+	};
 }

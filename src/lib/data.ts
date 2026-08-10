@@ -48,7 +48,7 @@ export const products: Product[] = [
 		price: 30,
 		category: "Merchandise",
 		description:
-			"A soft gray pullover with an adjustable hood, kangaroo pocket, ribbed cuffs, and the Veterans Outdoor Therapy mark on the chest.",
+			"A soft gray pullover with an adjustable hood, kangaroo pocket, ribbed cuffs, and the Veteran's Outdoor Therapy mark on the chest.",
 		image: `${uploads}/2025/12/FullSizeRender-3-scaled.jpeg`,
 		gallery: [`${uploads}/2025/12/FullSizeRender-3-scaled.jpeg`],
 		sizes: ["S", "M", "L", "XL", "XXL"],
@@ -72,7 +72,7 @@ export const products: Product[] = [
 		price: 30,
 		category: "Merchandise",
 		description:
-			"A comfortable tan pullover hoodie featuring the Veterans Outdoor Therapy logo, an adjustable hood, and a classic kangaroo pocket.",
+			"A comfortable tan pullover hoodie featuring the Veteran's Outdoor Therapy logo, an adjustable hood, and a classic kangaroo pocket.",
 		image: `${uploads}/2025/12/FullSizeRender-4.jpeg`,
 		gallery: [`${uploads}/2025/12/FullSizeRender-4.jpeg`],
 		sizes: ["S", "M", "L", "XL", "XXL"],
@@ -273,7 +273,7 @@ export const events: Event[] = [
 		summary: "A day of riding, connection, and impact in support of Veterans and Gold Star families.",
 		heroTitle: "Ride with purpose.",
 		overviewTitle: "Start and finish together.",
-		overview: "The 2nd Annual Veterans Outdoor Therapy Poker Run brought riders together for a powerful day supporting outdoor therapy programs.",
+		overview: "The 2nd Annual Veteran's Outdoor Therapy Poker Run brought riders together for a powerful day supporting outdoor therapy programs.",
 		detailsTitle: "Every mile funded recovery.",
 		details: "Proceeds support fishing, hiking, camping, and hunting experiences that promote healing, camaraderie, and recovery.",
 		ctaLabel: "Support the mission",
@@ -286,7 +286,7 @@ export const events: Event[] = [
 ];
 
 export const healingPowerCopy =
-	"Engaging in activities such as hiking, horseback riding, fishing, and hunting offers a refreshing escape from daily life while creating opportunities for reflection and bonding with fellow veterans who understand similar experiences and challenges. These adventures can significantly alleviate stress and contribute to the mental well-being of our Soldiers and Gold Star family members. We LOVE the outdoors, have witnessed its healing power, and are thrilled to share our passion with others!";
+	"Engaging in activities such as hiking, horseback riding, fishing, and hunting offers a refreshing escape from daily life while creating opportunities for reflection and bonding with fellow Veterans who understand similar experiences and challenges. These adventures can alleviate stress and support the well-being of Soldiers and Gold Star family members. We love the outdoors, have witnessed the value of time outside, and are proud to share that passion with others.";
 
 export const contributionCopy =
 	"Not everyone can sponsor at the Gold, Silver, or Bronze level — and that’s okay. Every donation, big or small, helps us give Veterans a chance to heal through the peace of the outdoors. Whether your gift helps provide a warm meal on a hunt, fuel for a fishing trip, or gear for an adventure, you’re directly impacting the lives of those who’ve served our nation. Join us in showing our Veterans that they are never alone on their journey to healing.";

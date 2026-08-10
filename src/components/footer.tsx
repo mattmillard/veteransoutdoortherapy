@@ -1,5 +1,6 @@
 import { ExternalLink, Mail, Mountain } from "lucide-react";
 import Link from "next/link";
+import { FACEBOOK_URL, SITE_NAME } from "@/lib/site";
 export function Footer() {
 	return (
 		<footer className="footer">
@@ -12,14 +13,15 @@ export function Footer() {
 						is outside.
 					</h2>
 					<p>
-						Veterans Outdoor Therapy is a nonprofit creating fully funded outdoor experiences for America&apos;s heroes.
+						{SITE_NAME} is a nonprofit creating fully funded outdoor experiences for previously deployed Veterans and Gold Star families.
 					</p>
 				</div>
 				<div>
 					<h3>Explore</h3>
 					<Link href="/about">Our mission</Link>
-					<Link href="/events">Adventures</Link>
-					<Link href="/gallery">Field gallery</Link>
+					<Link href="/programs">Programs</Link>
+					<Link href="/gold-star-families">Gold Star families</Link>
+					<Link href="/field-stories">Field stories</Link>
 				</div>
 				<div>
 					<h3>Take action</h3>
@@ -34,16 +36,17 @@ export function Footer() {
 						<Mail size={16} /> Email us
 					</a>
 					<a
-						href="https://www.facebook.com/p/Veterans-Outdoor-Therapy-61573994307519/"
+						href={FACEBOOK_URL}
 						target="_blank"
 						rel="noreferrer">
 						<ExternalLink size={16} /> Facebook
 					</a>
 					<Link href="/contact">Contact</Link>
+					<Link href="/privacy">Privacy</Link>
 				</div>
 			</div>
 			<div className="container footer-bottom">
-				<span>© {new Date().getFullYear()} Veterans Outdoor Therapy</span>
+				<span>© {new Date().getFullYear()} {SITE_NAME}</span>
 				<Link href="/admin">Admin</Link>
 			</div>
 		</footer>

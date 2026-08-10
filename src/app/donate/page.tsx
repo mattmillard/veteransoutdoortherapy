@@ -1,5 +1,12 @@
 import { ArrowDown, BedDouble, Fuel, UtensilsCrossed } from "lucide-react";
 import Link from "next/link";
+import { pageMetadata } from "@/lib/site";
+
+export const metadata = pageMetadata({
+	title: "Donate to Veteran Outdoor Programs",
+	description: "Support fully funded outdoor experiences for previously deployed Veterans and Gold Star families through a secure donation to Veteran's Outdoor Therapy.",
+	path: "/donate",
+});
 
 const zeffyFormUrl =
 	"https://www.zeffy.com/en-US/donation-form/make-an-impact-on-the-lives-of-our-american-heroes-and-gold-star-families";
@@ -31,11 +38,7 @@ export default function DonatePage() {
 			<section className="donate-page">
 				<div className="container">
 					<p className="eyebrow">Every gift moves the mission</p>
-					<h1 className="display">
-						Fuel the
-						<br />
-						next mile.
-					</h1>
+					<h1 className="display">Help carry the next outdoor experience into the field.</h1>
 					<p>
 						From a warm meal on a hunt to fuel for a fishing trip, your contribution gives Veterans and Gold Star
 						families space to reconnect and heal outside.

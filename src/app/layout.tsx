@@ -3,6 +3,8 @@ import { Archivo, Barlow_Condensed } from "next/font/google";
 import { CartProvider } from "@/components/cart-provider";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { JsonLd } from "@/components/json-ld";
+import { absoluteUrl, CONTACT_EMAIL, FACEBOOK_URL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const archivo = Archivo({
@@ -17,9 +19,25 @@ const barlow = Barlow_Condensed({
 });
 
 export const metadata: Metadata = {
-	metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || "https://veteransoutdoortherapy.org"),
-	title: { default: "Veterans Outdoor Therapy", template: "%s | Veterans Outdoor Therapy" },
-	description: "Fully funded outdoor adventures for Veterans, Gold Star families, and children.",
+	metadataBase: new URL(SITE_URL),
+	title: { default: SITE_NAME, template: `%s | ${SITE_NAME}` },
+	description: SITE_DESCRIPTION,
+	applicationName: SITE_NAME,
+	openGraph: {
+		title: SITE_NAME,
+		description: SITE_DESCRIPTION,
+		url: "/",
+		siteName: SITE_NAME,
+		type: "website",
+		images: [{ url: "/vot-logo-original.png", alt: SITE_NAME }],
+	},
+	twitter: {
+		card: "summary_large_image",
+		title: SITE_NAME,
+		description: SITE_DESCRIPTION,
+		images: ["/vot-logo-original.png"],
+	},
+	robots: { index: true, follow: true },
 	icons: {
 		icon: [
 			{ url: "/vot-icon-192.png", sizes: "192x192", type: "image/png" },
@@ -30,9 +48,32 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+	const organizationSchema = {
+		"@context": "https://schema.org",
+		"@type": ["Organization", "NGO"],
+		"@id": `${SITE_URL}/#organization`,
+		name: SITE_NAME,
+		url: SITE_URL,
+		logo: absoluteUrl("/vot-logo-original.png"),
+		description: SITE_DESCRIPTION,
+		email: CONTACT_EMAIL,
+		nonprofitStatus: "Nonprofit501c3",
+		sameAs: [FACEBOOK_URL, "https://www.instagram.com/veteransoutdoortherapy"],
+		contactPoint: { "@type": "ContactPoint", contactType: "general inquiries", email: CONTACT_EMAIL },
+	};
+	const websiteSchema = {
+		"@context": "https://schema.org",
+		"@type": "WebSite",
+		"@id": `${SITE_URL}/#website`,
+		name: SITE_NAME,
+		url: SITE_URL,
+		description: SITE_DESCRIPTION,
+		publisher: { "@id": `${SITE_URL}/#organization` },
+	};
 	return (
 		<html lang="en" className={`${archivo.variable} ${barlow.variable}`}>
 			<body>
+				<JsonLd data={[organizationSchema, websiteSchema]} />
 				<CartProvider>
 					<Header />
 					<main>{children}</main>

@@ -1,9 +1,13 @@
-import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { getEvents } from "@/lib/db";
+import { pageMetadata } from "@/lib/site";
 
-export const metadata: Metadata = { title: "Upcoming Events" };
+export const metadata = pageMetadata({
+	title: "Veteran Hunting Trips and Outdoor Events",
+	description: "View upcoming Veteran hunts, horseback camps, fundraisers, and outdoor experiences hosted by Veteran's Outdoor Therapy and its mission partners.",
+	path: "/events",
+});
 
 export default async function EventsPage() {
 	const events = (await getEvents())
@@ -15,11 +19,7 @@ export default async function EventsPage() {
 			<section className="page-hero">
 				<div className="container">
 					<p className="eyebrow">2026 field calendar</p>
-					<h1 className="display">
-						Go farther,
-						<br />
-						together.
-					</h1>
+					<h1 className="display">Upcoming Veteran hunts and outdoor experiences.</h1>
 					<p>Every trip is built around connection, challenge, and the quiet that only open country can provide.</p>
 				</div>
 			</section>

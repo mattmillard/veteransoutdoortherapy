@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import { SITE_DESCRIPTION, SITE_NAME } from "@/lib/site";
 
 export default function manifest(): MetadataRoute.Manifest {
 	return {
-		name: "Veterans Outdoor Therapy",
+		name: SITE_NAME,
 		short_name: "VOT",
-		description: "Fully funded outdoor adventures for Veterans, Gold Star families, and children.",
+		description: SITE_DESCRIPTION,
 		start_url: "/",
 		display: "standalone",
 		background_color: "#f5f2e8",

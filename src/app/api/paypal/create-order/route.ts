@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 					purchase_units: [
 						{
 							amount: { currency_code: "USD", value: total.toFixed(2) },
-							description: "Veterans Outdoor Therapy purchase",
+							description: "Veteran's Outdoor Therapy purchase",
 						},
 					],
 				}),
