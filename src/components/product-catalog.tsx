@@ -13,6 +13,19 @@ function normalize(value: string) {
 	return value.trim().toLowerCase();
 }
 
+function isSponsorship(product: Product) {
+	return normalize(product.category) === "sponsorships";
+}
+
+function sortProducts(products: Product[]) {
+	return [...products].sort((first, second) => {
+		const categoryOrder = Number(isSponsorship(first)) - Number(isSponsorship(second));
+		if (categoryOrder !== 0) return categoryOrder;
+		if (isSponsorship(first)) return second.price - first.price;
+		return 0;
+	});
+}
+
 export function ProductCatalog({ products }: { products: Product[] }) {
 	const tabs = useMemo(() => {
 		const counts = new Map<string, CatalogTab>();
@@ -27,7 +40,11 @@ export function ProductCatalog({ products }: { products: Product[] }) {
 			counts.set(key, { label, count: 1 });
 		}
 		const dynamicTabs = Array.from(counts.entries())
-			.sort((a, b) => a[1].label.localeCompare(b[1].label))
+			.sort((a, b) => {
+				if (a[0] === "sponsorships") return 1;
+				if (b[0] === "sponsorships") return -1;
+				return a[1].label.localeCompare(b[1].label);
+			})
 			.map(([key, value]) => ({ key, ...value }));
 		return [{ key: "all", label: "All products", count: products.length }, ...dynamicTabs];
 	}, [products]);
@@ -35,9 +52,9 @@ export function ProductCatalog({ products }: { products: Product[] }) {
 	const [activeTab, setActiveTab] = useState("all");
 
 	const filtered = useMemo(() => {
-		if (activeTab === "all") return products;
+		if (activeTab === "all") return sortProducts(products);
 		const categoryProducts = products.filter((product) => normalize(product.category) === activeTab);
-		if (activeTab === "sponsorships") return categoryProducts.sort((a, b) => b.price - a.price);
+		if (activeTab === "sponsorships") return sortProducts(categoryProducts);
 		return categoryProducts;
 	}, [activeTab, products]);
 

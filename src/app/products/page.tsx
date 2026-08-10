@@ -9,11 +9,11 @@ export default async function ProductsPage() {
 	return (
 		<section className="section">
 			<div className="container">
-				<p className="eyebrow">Explore the full catalog</p>
-				<h1 className="display section-title">All products, sorted your way.</h1>
+				<p className="eyebrow">Every purchase supports the mission</p>
+				<h1 className="display section-title">Gear that gives back.</h1>
 				<p className="prose">
-					Use category tabs to browse by product type. As you add new categories like mugs, hoodies, shirts, or
-					packs in admin, they automatically appear here.
+					Shop our collection of Veterans Outdoor Therapy apparel and gear. Every order helps fund outdoor experiences
+					for Veterans and Gold Star families.
 				</p>
 				<ProductCatalog products={items} />
 			</div>
