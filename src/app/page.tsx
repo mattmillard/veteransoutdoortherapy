@@ -1,8 +1,9 @@
 import { ArrowRight, Compass, HeartHandshake, ShieldCheck } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { MissionFilm } from "@/components/mission-film";
 import { ProductCard } from "@/components/product-card";
-import { contributionCopy, healingPowerCopy, mission } from "@/lib/data";
+import { contributionCopy, mission } from "@/lib/data";
 import { getEvents, getProducts } from "@/lib/db";
 import { pageMetadata } from "@/lib/site";
 import { sponsorLogos } from "@/lib/sponsors";
@@ -18,8 +19,9 @@ const homepageSponsors = sponsorLogos.filter((sponsor) => sponsor.featured);
 export default async function Home() {
 	const [products, events] = await Promise.all([getProducts(), getEvents()]);
 	const merchandise = products.filter((item) => item.category === "Merchandise" && item.featured);
+	const today = new Date().toISOString().slice(0, 10);
 	const featuredEvents = events
-		.filter((event) => event.published && event.featured)
+		.filter((event) => event.published && event.featured && event.endDate >= today)
 		.sort((a, b) => a.sortOrder - b.sortOrder)
 		.slice(0, 3);
 	return (
@@ -52,26 +54,7 @@ export default async function Home() {
 					<p className="mission-copy">{mission}</p>
 				</div>
 			</section>
-			<section className="section healing-section">
-				<div className="container healing-grid">
-					<div className="healing-video">
-						<iframe
-							src="https://www.youtube-nocookie.com/embed/yWHOErhxKQ4"
-							title="The Healing Power of Nature"
-							width="1280"
-							height="720"
-							loading="lazy"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-							allowFullScreen
-						/>
-					</div>
-					<div>
-						<p className="eyebrow">Why we head outside</p>
-						<h2 className="display section-title">The Healing Power of Nature</h2>
-						<p className="prose">{healingPowerCopy}</p>
-					</div>
-				</div>
-			</section>
+			<MissionFilm />
 			<section className="section">
 				<div className="container">
 					<p className="eyebrow">In the field</p>

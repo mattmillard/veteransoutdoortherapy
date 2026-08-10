@@ -59,12 +59,6 @@ const customTier = {
 };
 const sponsorEvents = [
 	{
-		title: "Poker Run",
-		date: "June 2026",
-		image: `${uploads}/2025/10/thumbnail_IMG_4884-980x735.jpg`,
-		copy: "Ride with purpose and help fund outdoor experiences for Veterans and Gold Star families.",
-	},
-	{
 		title: "Gold Star Peak Hike",
 		date: "2027",
 		image: `${uploads}/2025/09/510943338_122138281850799810_4751360453603558598_n-980x575.jpg`,

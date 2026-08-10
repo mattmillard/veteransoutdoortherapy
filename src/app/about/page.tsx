@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { MissionFilm } from "@/components/mission-film";
 import { mission } from "@/lib/data";
 import { pageMetadata } from "@/lib/site";
 export const metadata = pageMetadata({
@@ -26,7 +27,6 @@ export default function AboutPage() {
 							Take the next step
 						</Link>
 						<Link className="text-link" href="/programs">Explore outdoor programs</Link>
-						<Link className="text-link" href="/team">Meet the team</Link>
 					</div>
 					<div className="story-image">
 						<Image
@@ -38,6 +38,7 @@ export default function AboutPage() {
 					</div>
 				</div>
 			</section>
+			<MissionFilm />
 			<section className="values">
 				<div className="container">
 					<p className="eyebrow">Our compass</p>

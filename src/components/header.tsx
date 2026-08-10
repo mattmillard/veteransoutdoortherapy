@@ -20,7 +20,6 @@ const groups = [
 		label: "About",
 		links: [
 			["Our mission", "/about"],
-			["Our team", "/team"],
 			["Gallery", "/gallery"],
 			["Contact", "/contact"],
 		],

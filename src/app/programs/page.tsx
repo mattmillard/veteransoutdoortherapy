@@ -2,6 +2,7 @@ import { Binoculars, Fish, Footprints, Trees } from "lucide-react";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
+import { MissionFilm } from "@/components/mission-film";
 import { breadcrumbSchema, faqSchema, pageMetadata } from "@/lib/site";
 
 export const metadata = pageMetadata({
@@ -85,6 +86,7 @@ export default function ProgramsPage() {
 					))}
 				</div>
 			</section>
+			<MissionFilm />
 			<section className="section faq-section">
 				<div className="container">
 					<p className="eyebrow">Program questions</p>

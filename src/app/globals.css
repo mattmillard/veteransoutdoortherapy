@@ -240,20 +240,24 @@ img {
 	color: #f6f2e5;
 	padding: 72px 0 24px;
 }
+
 .footer-grid {
 	display: grid;
 	grid-template-columns: 2fr repeat(3, 1fr);
 	gap: 50px;
 }
+
 .footer h2 {
 	margin: 15px 0;
 	font-size: clamp(2.2rem, 4vw, 3.8rem);
 }
+
 .footer h3 {
 	color: #d7b954;
 	font-size: 0.85rem;
 	text-transform: uppercase;
 }
+
 .footer-grid > div {
 	display: flex;
 	flex-direction: column;
@@ -388,7 +392,7 @@ img {
 .hero h1 {
 	max-width: 850px;
 	margin: 14px 0 24px;
-	font-size: clamp(4rem, 10vw, 8rem);
+	font-size: clamp(4rem, 8vw, 6rem);
 }
 .hero-content > p:not(.eyebrow) {
 	max-width: 42rem;
@@ -430,7 +434,8 @@ img {
 	font-size: 1.08rem;
 	line-height: 1.8;
 }
-.healing-section {
+.healing-section,
+.mission-film {
 	background: #e4e6df;
 }
 .healing-grid {
@@ -783,7 +788,7 @@ img {
 .page-hero h1 {
 	max-width: 850px;
 	margin: 12px 0 22px;
-	font-size: clamp(4.4rem, 11vw, 9rem);
+	font-size: clamp(4.4rem, 8vw, 6rem);
 }
 .page-hero > .container > p:not(.eyebrow) {
 	max-width: 42rem;
@@ -966,24 +971,6 @@ img {
 	white-space: nowrap;
 	border: 0;
 }
-.team-grid {
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 25px;
-	margin-top: 45px;
-}
-.team-grid article > div {
-	position: relative;
-	aspect-ratio: 4 / 5;
-	background: #ddd;
-}
-.team-grid img {
-	object-fit: cover;
-}
-.team-grid h2 {
-	font-size: 2.2rem;
-	margin: 15px 0 5px;
-}
 .product-detail {
 	display: grid;
 	grid-template-columns: 1.1fr 0.9fr;
@@ -1055,6 +1042,55 @@ img {
 	padding-top: 20px;
 	font-size: 0.85rem;
 }
+.past-events-section {
+	background: #e4e6df;
+}
+.past-events-intro {
+	max-width: 720px;
+	margin-bottom: 42px;
+}
+.past-events-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 48px 18px;
+}
+.past-events-grid article {
+	display: flex;
+	min-width: 0;
+	flex-direction: column;
+}
+.past-event-image {
+	position: relative;
+	overflow: hidden;
+	aspect-ratio: 4 / 3;
+	margin-bottom: 22px;
+}
+.past-event-image img {
+	object-fit: cover;
+}
+.past-events-grid h3 {
+	margin: 6px 0 10px;
+	font-size: clamp(2rem, 3vw, 3rem);
+	line-height: 0.98;
+}
+.past-events-grid strong {
+	font-size: 0.84rem;
+	text-transform: uppercase;
+}
+.past-events-grid .text-link {
+	margin-top: auto;
+	padding-top: 8px;
+}
+@media (max-width: 900px) {
+	.past-events-grid {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+}
+@media (max-width: 620px) {
+	.past-events-grid {
+		grid-template-columns: 1fr;
+	}
+}
 @media (max-width: 850px) {
 	.mission-grid,
 	.impact-grid,
@@ -1092,9 +1128,6 @@ img {
 	.event-strip,
 	.product-grid,
 	.value-grid,
-	.team-grid {
-		grid-template-columns: 1fr;
-	}
 	.product-masonry {
 		grid-template-columns: 1fr;
 	}
@@ -1281,7 +1314,7 @@ img {
 }
 .donate-page h1 {
 	margin: 12px 0 24px;
-	font-size: clamp(5rem, 13vw, 10rem);
+	font-size: clamp(5rem, 8vw, 6rem);
 }
 .donate-page p:not(.eyebrow) {
 	max-width: 630px;
@@ -1471,7 +1504,7 @@ img {
 }
 .event-page-hero h1 {
 	margin: 12px 0 22px;
-	font-size: clamp(4rem, 8vw, 7.5rem);
+	font-size: clamp(4rem, 7vw, 6rem);
 	line-height: 0.86;
 }
 .event-page-hero p:not(.eyebrow) {
@@ -1633,7 +1666,7 @@ img {
 }
 .compact-hero h1 {
 	max-width: 1000px;
-	font-size: clamp(3.5rem, 8vw, 7rem);
+	font-size: clamp(3.5rem, 7vw, 6rem);
 }
 .application-grid {
 	display: grid;
@@ -1813,7 +1846,7 @@ img {
 .field-story-heading h1 {
 	max-width: 960px;
 	margin: 12px 0 22px;
-	font-size: clamp(4rem, 8vw, 7.5rem);
+	font-size: clamp(4rem, 7vw, 6rem);
 	line-height: 0.9;
 }
 .field-story-meta {
