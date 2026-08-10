@@ -23,10 +23,12 @@ export default function AboutPage() {
 						<p className="eyebrow">Our mission</p>
 						<h2 className="display section-title">Honor in motion.</h2>
 						<p className="prose">{mission}</p>
-						<Link className="button orange" href="/application">
-							Take the next step
-						</Link>
-						<Link className="text-link" href="/programs">Explore outdoor programs</Link>
+						<div className="hero-actions">
+							<Link className="button orange" href="/application">
+								Take the next step
+							</Link>
+							<Link className="text-link" href="/programs">Explore outdoor programs</Link>
+						</div>
 					</div>
 					<div className="story-image">
 						<Image

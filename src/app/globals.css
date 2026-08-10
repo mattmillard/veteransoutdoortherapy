@@ -835,6 +835,10 @@ img {
 .story-grid .button {
 	margin-top: 22px;
 }
+.story-grid .hero-actions .button,
+.story-grid .hero-actions .text-link {
+	margin-top: 0;
+}
 .story-image {
 	position: relative;
 	min-height: 520px;
