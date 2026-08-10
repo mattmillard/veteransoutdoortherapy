@@ -21,7 +21,7 @@ function sortProducts(products: Product[]) {
 	return [...products].sort((first, second) => {
 		const categoryOrder = Number(isSponsorship(first)) - Number(isSponsorship(second));
 		if (categoryOrder !== 0) return categoryOrder;
-		if (isSponsorship(first)) return second.price - first.price;
+		if (isSponsorship(first)) return first.price - second.price;
 		return 0;
 	});
 }
