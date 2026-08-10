@@ -94,14 +94,9 @@ export default async function Home() {
 			<section className="sponsor-badge-band" aria-labelledby="homepage-sponsors-title">
 				<div className="container">
 					<div className="sponsor-badge-heading">
-						<div>
-							<p className="eyebrow">Mission partners</p>
-							<h2 className="display" id="homepage-sponsors-title">
-								Proudly supported by.
-							</h2>
-						</div>
+						<h2 id="homepage-sponsors-title">Partners in the mission</h2>
 						<Link className="text-link" href="/sponsorships">
-							Become a sponsor <ArrowRight size={17} />
+							Partner with us <ArrowRight size={17} />
 						</Link>
 					</div>
 					<div className="sponsor-badge-grid">
