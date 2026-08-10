@@ -25,11 +25,20 @@ async function ensureEvents() {
 	const db = sql();
 	if (!db) return null;
 	await db`CREATE TABLE IF NOT EXISTS events (slug text PRIMARY KEY, title text NOT NULL, date_label text NOT NULL, start_date date NOT NULL, end_date date NOT NULL, image text NOT NULL, event_type text NOT NULL, location text NOT NULL, summary text NOT NULL, hero_title text NOT NULL, overview_title text NOT NULL, overview text NOT NULL, details_title text NOT NULL, details text NOT NULL, cta_label text NOT NULL, cta_href text NOT NULL, template text NOT NULL DEFAULT 'adventure', published boolean NOT NULL DEFAULT true, featured boolean NOT NULL DEFAULT false, sort_order integer NOT NULL DEFAULT 0, updated_at timestamptz NOT NULL DEFAULT now())`;
+	await db`ALTER TABLE events ADD COLUMN IF NOT EXISTS is_over boolean NOT NULL DEFAULT false`;
+	await db`ALTER TABLE events ADD COLUMN IF NOT EXISTS recap_url text`;
 	await db`CREATE TABLE IF NOT EXISTS migrations (id text PRIMARY KEY, applied_at timestamptz NOT NULL DEFAULT now())`;
 	const officialNameMigration =
 		await db`INSERT INTO migrations (id) VALUES ('event-official-name-veterans-to-veteran') ON CONFLICT (id) DO NOTHING RETURNING id`;
 	if (officialNameMigration.length)
 		await db`UPDATE events SET title = replace(title, 'Veterans Outdoor Therapy', ${SITE_NAME}), summary = replace(summary, 'Veterans Outdoor Therapy', ${SITE_NAME}), hero_title = replace(hero_title, 'Veterans Outdoor Therapy', ${SITE_NAME}), overview = replace(overview, 'Veterans Outdoor Therapy', ${SITE_NAME}), details = replace(details, 'Veterans Outdoor Therapy', ${SITE_NAME}), updated_at = now()`;
+	const recapMigration = await db`INSERT INTO migrations (id) VALUES ('event-recaps-and-over-2026') ON CONFLICT (id) DO NOTHING RETURNING id`;
+	if (recapMigration.length) {
+		await db`UPDATE events SET is_over = true, recap_url = 'https://www.facebook.com/share/p/1BNHxQBuq1/', summary = 'Four Veterans completed the inaugural Missouri turkey hunt, with every hunter tagging a bird and two harvesting their first toms.', details = 'Veterans from Ohio, Nebraska, and Missouri joined local landowners, guides, volunteers, and community supporters for the hunt.', updated_at = now() WHERE slug = 'missouri-turkey-hunt-2026'`;
+		await db`UPDATE events SET is_over = true, recap_url = 'https://www.facebook.com/share/p/18AbcbA7td/', details = 'Veterans from Texas and Kansas gathered in the Flint Hills, hosted by Forest, Jardine, and Dru.', updated_at = now() WHERE slug = 'flint-hills-kansas-turkey-hunt-2026'`;
+		await db`UPDATE events SET is_over = true, recap_url = 'https://www.facebook.com/share/p/18y8SZtxbM/', location = 'Coulter Lake Guest Ranch, Rifle, Colorado', summary = 'The first annual horseback riding adventure brought female Veterans from Alabama, Wisconsin, South Dakota, and Missouri together at Coulter Lake Guest Ranch.', details = 'Kelly and Forest Keith, Dina, and Maru hosted the group, with first-year funding support from the Military Order of the Purple Heart.', updated_at = now() WHERE slug = 'coulter-lake-guest-ranch-2026'`;
+		await db`UPDATE events SET is_over = true, recap_url = 'https://www.facebook.com/share/p/1LZEGfVeTT/', summary = 'Volunteers, sponsors, participants, and riders gathered for the second annual Poker Run, raising support for Veterans and Gold Star families.', updated_at = now() WHERE slug = 'poker-run-2026'`;
+	}
 	return db;
 }
 
@@ -89,6 +98,8 @@ function rowToEvent(row: Record<string, unknown>): Event {
 		template: String(row.template) as EventTemplate,
 		published: Boolean(row.published),
 		featured: Boolean(row.featured),
+		over: Boolean(row.is_over),
+		recapUrl: row.recap_url ? String(row.recap_url) : undefined,
 		sortOrder: Number(row.sort_order),
 	};
 }
@@ -112,7 +123,7 @@ export async function saveEvent(event: Event, previousSlug = event.slug) {
 	const db = await ensureEvents();
 	if (!db) throw new Error("DATABASE_URL is required to save events.");
 	if (previousSlug && previousSlug !== event.slug) await db`DELETE FROM events WHERE slug = ${previousSlug}`;
-	await db`INSERT INTO events (slug, title, date_label, start_date, end_date, image, event_type, location, summary, hero_title, overview_title, overview, details_title, details, cta_label, cta_href, template, published, featured, sort_order) VALUES (${event.slug}, ${event.title}, ${event.date}, ${event.startDate}, ${event.endDate}, ${event.image}, ${event.type}, ${event.location}, ${event.summary}, ${event.heroTitle}, ${event.overviewTitle}, ${event.overview}, ${event.detailsTitle}, ${event.details}, ${event.ctaLabel}, ${event.ctaHref}, ${event.template}, ${event.published}, ${event.featured}, ${event.sortOrder}) ON CONFLICT (slug) DO UPDATE SET title = EXCLUDED.title, date_label = EXCLUDED.date_label, start_date = EXCLUDED.start_date, end_date = EXCLUDED.end_date, image = EXCLUDED.image, event_type = EXCLUDED.event_type, location = EXCLUDED.location, summary = EXCLUDED.summary, hero_title = EXCLUDED.hero_title, overview_title = EXCLUDED.overview_title, overview = EXCLUDED.overview, details_title = EXCLUDED.details_title, details = EXCLUDED.details, cta_label = EXCLUDED.cta_label, cta_href = EXCLUDED.cta_href, template = EXCLUDED.template, published = EXCLUDED.published, featured = EXCLUDED.featured, sort_order = EXCLUDED.sort_order, updated_at = now()`;
+	await db`INSERT INTO events (slug, title, date_label, start_date, end_date, image, event_type, location, summary, hero_title, overview_title, overview, details_title, details, cta_label, cta_href, template, published, featured, is_over, recap_url, sort_order) VALUES (${event.slug}, ${event.title}, ${event.date}, ${event.startDate}, ${event.endDate}, ${event.image}, ${event.type}, ${event.location}, ${event.summary}, ${event.heroTitle}, ${event.overviewTitle}, ${event.overview}, ${event.detailsTitle}, ${event.details}, ${event.ctaLabel}, ${event.ctaHref}, ${event.template}, ${event.published}, ${event.featured}, ${event.over}, ${event.recapUrl ?? null}, ${event.sortOrder}) ON CONFLICT (slug) DO UPDATE SET title = EXCLUDED.title, date_label = EXCLUDED.date_label, start_date = EXCLUDED.start_date, end_date = EXCLUDED.end_date, image = EXCLUDED.image, event_type = EXCLUDED.event_type, location = EXCLUDED.location, summary = EXCLUDED.summary, hero_title = EXCLUDED.hero_title, overview_title = EXCLUDED.overview_title, overview = EXCLUDED.overview, details_title = EXCLUDED.details_title, details = EXCLUDED.details, cta_label = EXCLUDED.cta_label, cta_href = EXCLUDED.cta_href, template = EXCLUDED.template, published = EXCLUDED.published, featured = EXCLUDED.featured, is_over = EXCLUDED.is_over, recap_url = EXCLUDED.recap_url, sort_order = EXCLUDED.sort_order, updated_at = now()`;
 }
 
 export async function deleteEvent(slug: string) {

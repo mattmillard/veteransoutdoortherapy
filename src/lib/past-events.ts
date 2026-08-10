@@ -10,6 +10,7 @@ export type PastEvent = {
 	image: string;
 	imageAlt?: string;
 	href?: string;
+	recapUrl?: string;
 };
 
 export const documentedPastEvents: PastEvent[] = [
@@ -21,6 +22,7 @@ export const documentedPastEvents: PastEvent[] = [
 		summary: "A sold-out evening centered on service, community, stories, and support for outdoor programs.",
 		image: `${uploads}/2025/09/511570233_122138280608799810_3062368554634141654_n.jpg`,
 		href: "/wilderness-to-wellness",
+		recapUrl: "https://www.facebook.com/share/p/18jSBLgpCR/",
 	},
 	{
 		title: "2026 Annual Gun Raffle",
@@ -39,15 +41,18 @@ export const documentedPastEvents: PastEvent[] = [
 		location: "Missouri",
 		summary: "A multi-day Missouri spoonbill fishing experience for Veterans in the field together.",
 		image: `${uploads}/2025/09/484977744_122104166432799810_7750842584414220054_n.jpg`,
+		recapUrl: "https://www.facebook.com/share/p/17xSyoKzX4/",
 	},
 	{
-		title: "Larry's Veteran's Day Elk Hunt",
+		title: "Larry's Arizona Elk Hunt",
 		date: "November 2025",
-		sortDate: "2025-11-01",
+		sortDate: "2025-11-20",
 		type: "Elk hunt",
-		summary: "A Veteran's Day elk hunt shared with Larry and documented by Veteran's Outdoor Therapy.",
+		location: "Arizona",
+		summary: "Larry encountered cow elk at close range while the group searched for a bull; the trip remained a meaningful time among friends despite difficult weather.",
 		image: `${uploads}/2025/10/AdobeStock_761949620-scaled.jpeg`,
-		imageAlt: "Elk at sunset representing Larry's Veteran's Day Elk Hunt",
+		imageAlt: "Elk at sunset representing Larry's Arizona Elk Hunt",
+		recapUrl: "https://www.facebook.com/share/p/19Z3SwTEUq/",
 	},
 	{
 		title: "Antelope Hunt",

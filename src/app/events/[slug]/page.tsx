@@ -30,6 +30,7 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 	const event = await getEvent(slug);
 	if (!event || !event.published) notFound();
 	const path = `/events/${event.slug}`;
+	const eventIsOver = event.over || new Date(event.endDate) < new Date();
 	const eventSchema = {
 		"@context": "https://schema.org",
 		"@type": "Event",
@@ -38,13 +39,13 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 		startDate: event.startDate,
 		endDate: event.endDate,
 		eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
-		eventStatus: new Date(event.endDate) < new Date() ? "https://schema.org/EventCompleted" : "https://schema.org/EventScheduled",
+		eventStatus: eventIsOver ? "https://schema.org/EventCompleted" : "https://schema.org/EventScheduled",
 		image: [event.image],
 		url: absoluteUrl(path),
 		location: { "@type": "Place", name: event.location },
 		audience: { "@type": "Audience", audienceType: "Previously deployed Veterans and Gold Star families" },
 		organizer: { "@id": `${SITE_URL}/#organization`, "@type": "Organization", name: SITE_NAME, url: SITE_URL },
-		...(event.template === "adventure" && {
+		...(!eventIsOver && event.template === "adventure" && {
 			offers: { "@type": "Offer", price: 0, priceCurrency: "USD", url: absoluteUrl(event.ctaHref), availability: "https://schema.org/LimitedAvailability" },
 		}),
 	};
@@ -71,9 +72,13 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 								<MapPin size={18} /> {event.location}
 							</span>
 						</div>
-						<Link className="button orange" href={event.ctaHref}>
-							{event.ctaLabel}
-						</Link>
+						{eventIsOver && event.recapUrl ? (
+							<a className="button orange" href={event.recapUrl} target="_blank" rel="noreferrer">View event recap</a>
+						) : (
+							<Link className="button orange" href={eventIsOver ? "/donate" : event.ctaHref}>
+								{eventIsOver ? "Support future events" : event.ctaLabel}
+							</Link>
+						)}
 					</div>
 					<div className="event-page-image">
 						<Image src={event.image} alt={event.title} fill priority sizes="(max-width: 800px) 100vw, 48vw" />
@@ -99,9 +104,13 @@ export default async function EventPage({ params }: { params: Promise<{ slug: st
 						<h2 className="display">{event.title}</h2>
 					</div>
 					<p>{event.summary}</p>
-					<Link className="button orange" href={event.ctaHref}>
-						{event.ctaLabel}
-					</Link>
+					{eventIsOver && event.recapUrl ? (
+						<a className="button orange" href={event.recapUrl} target="_blank" rel="noreferrer">View event recap</a>
+					) : (
+						<Link className="button orange" href={eventIsOver ? "/donate" : event.ctaHref}>
+							{eventIsOver ? "Support future events" : event.ctaLabel}
+						</Link>
+					)}
 				</div>
 			</section>
 		</>

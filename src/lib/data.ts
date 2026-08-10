@@ -166,6 +166,8 @@ export type Event = {
 	template: EventTemplate;
 	published: boolean;
 	featured: boolean;
+	over: boolean;
+	recapUrl?: string;
 	sortOrder: number;
 };
 
@@ -182,17 +184,19 @@ export const events: Event[] = [
 		image: `${uploads}/2026/01/turkey.jpg`,
 		type: "Hunt",
 		location: "Missouri",
-		summary: "A fully supported spring turkey hunt built around time outdoors, camaraderie, and connection.",
+		summary: "Four Veterans completed the inaugural Missouri turkey hunt, with every hunter tagging a bird and two harvesting their first toms.",
 		heroTitle: "Find connection in the spring woods.",
 		overviewTitle: "A shared hunt with a larger purpose.",
 		overview: participantDetails,
 		detailsTitle: "What participants can expect",
-		details: "Guided time in the field, shared meals, and a welcoming group of Veterans and supporters.",
+		details: "Veterans from Ohio, Nebraska, and Missouri joined local landowners, guides, volunteers, and community supporters for the hunt.",
 		ctaLabel: "Apply for support",
 		ctaHref: "/apply",
 		template: "adventure",
 		published: true,
 		featured: true,
+		over: true,
+		recapUrl: "https://www.facebook.com/share/p/1BNHxQBuq1/",
 		sortOrder: 1,
 	},
 	{
@@ -209,12 +213,14 @@ export const events: Event[] = [
 		overviewTitle: "Open country. Shared purpose.",
 		overview: participantDetails,
 		detailsTitle: "What participants can expect",
-		details: "Time in the field, shared meals, and the support needed to focus on the experience and one another.",
+		details: "Veterans from Texas and Kansas gathered in the Flint Hills, hosted by Forest, Jardine, and Dru.",
 		ctaLabel: "Apply for support",
 		ctaHref: "/apply",
 		template: "adventure",
 		published: true,
 		featured: true,
+		over: true,
+		recapUrl: "https://www.facebook.com/share/p/18AbcbA7td/",
 		sortOrder: 2,
 	},
 	{
@@ -237,6 +243,7 @@ export const events: Event[] = [
 		template: "adventure",
 		published: true,
 		featured: true,
+		over: false,
 		sortOrder: 3,
 	},
 	{
@@ -247,18 +254,20 @@ export const events: Event[] = [
 		endDate: "2026-07-12",
 		image: `${uploads}/2026/01/horseback.jpg`,
 		type: "Female horseback camp",
-		location: "Coulter Lake Guest Ranch",
-		summary: "A restorative horseback camp for women built around confidence, community, and time outside.",
+		location: "Coulter Lake Guest Ranch, Rifle, Colorado",
+		summary: "The first annual horseback riding adventure brought female Veterans from Alabama, Wisconsin, South Dakota, and Missouri together at Coulter Lake Guest Ranch.",
 		heroTitle: "Ride into room to reconnect.",
 		overviewTitle: "A supported ranch experience.",
 		overview: participantDetails,
 		detailsTitle: "What participants can expect",
-		details: "Horseback riding, shared meals, and unhurried time with a community that understands.",
+		details: "Kelly and Forest Keith, Dina, and Maru hosted the group, with first-year funding support from the Military Order of the Purple Heart.",
 		ctaLabel: "Apply for support",
 		ctaHref: "/apply",
 		template: "adventure",
 		published: true,
 		featured: false,
+		over: true,
+		recapUrl: "https://www.facebook.com/share/p/18y8SZtxbM/",
 		sortOrder: 4,
 	},
 	{
@@ -270,7 +279,7 @@ export const events: Event[] = [
 		image: `${uploads}/2025/10/thumbnail_IMG_4884-980x735.jpg`,
 		type: "Fundraiser",
 		location: "Columbia, Missouri",
-		summary: "A day of riding, connection, and impact in support of Veterans and Gold Star families.",
+		summary: "Volunteers, sponsors, participants, and riders gathered for the second annual Poker Run, raising support for Veterans and Gold Star families.",
 		heroTitle: "Ride with purpose.",
 		overviewTitle: "Start and finish together.",
 		overview: "The 2nd Annual Veteran's Outdoor Therapy Poker Run brought riders together for a powerful day supporting outdoor therapy programs.",
@@ -281,6 +290,8 @@ export const events: Event[] = [
 		template: "fundraiser",
 		published: true,
 		featured: false,
+		over: true,
+		recapUrl: "https://www.facebook.com/share/p/1LZEGfVeTT/",
 		sortOrder: 5,
 	},
 ];

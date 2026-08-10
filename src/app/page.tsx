@@ -21,7 +21,7 @@ export default async function Home() {
 	const merchandise = products.filter((item) => item.category === "Merchandise" && item.featured);
 	const today = new Date().toISOString().slice(0, 10);
 	const featuredEvents = events
-		.filter((event) => event.published && event.featured && event.endDate >= today)
+		.filter((event) => event.published && event.featured && !event.over && event.endDate >= today)
 		.sort((a, b) => a.sortOrder - b.sortOrder)
 		.slice(0, 3);
 	return (

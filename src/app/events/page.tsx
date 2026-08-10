@@ -16,9 +16,9 @@ export default async function EventsPage() {
 		.filter((event) => event.published)
 		.sort((a, b) => a.sortOrder - b.sortOrder);
 	const today = new Date().toISOString().slice(0, 10);
-	const upcomingEvents = events.filter((event) => event.endDate >= today);
+	const upcomingEvents = events.filter((event) => !event.over && event.endDate >= today);
 	const completedEvents: PastEvent[] = events
-		.filter((event) => event.endDate < today)
+		.filter((event) => event.over || event.endDate < today)
 		.map((event) => ({
 			title: event.title,
 			date: event.date,
@@ -28,6 +28,7 @@ export default async function EventsPage() {
 			summary: event.summary,
 			image: event.image,
 			href: `/events/${event.slug}`,
+			recapUrl: event.recapUrl,
 		}));
 	const pastEvents = [...completedEvents, ...documentedPastEvents].sort((a, b) => b.sortDate.localeCompare(a.sortDate));
 
@@ -76,6 +77,7 @@ export default async function EventsPage() {
 								<strong>{event.date}{event.location ? ` | ${event.location}` : ""}</strong>
 								<p>{event.summary}</p>
 								{event.href && <Link className="text-link" href={event.href}>View event details</Link>}
+								{event.recapUrl && <a className="text-link" href={event.recapUrl} target="_blank" rel="noreferrer">View Facebook recap</a>}
 							</article>
 						))}
 					</div>

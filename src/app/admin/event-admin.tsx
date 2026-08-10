@@ -97,6 +97,10 @@ export function EventAdmin({ events, selected }: { events: Event[]; selected?: E
 					Existing image URL
 					<input className="field" name="image" defaultValue={selected?.image} />
 				</label>
+				<label>
+					Facebook recap URL
+					<input className="field" name="recapUrl" type="url" defaultValue={selected?.recapUrl} placeholder="https://www.facebook.com/share/p/..." />
+				</label>
 				<input type="hidden" name="existingImage" value={selected?.image || ""} />
 				<label>
 					Or upload a new image
@@ -108,6 +112,9 @@ export function EventAdmin({ events, selected }: { events: Event[]; selected?: E
 					</label>
 					<label className="consent">
 						<input name="featured" type="checkbox" defaultChecked={selected?.featured} /> Feature on home page
+					</label>
+					<label className="consent">
+						<input name="over" type="checkbox" defaultChecked={selected?.over} /> Over (move to Past Events)
 					</label>
 				</div>
 				<button className="button orange" type="submit">
@@ -123,6 +130,7 @@ export function EventAdmin({ events, selected }: { events: Event[]; selected?: E
 							<span>
 								{event.date} · {event.published ? "Published" : "Draft"}
 								{event.featured ? " · Home" : ""}
+								{event.over ? " · Over" : ""}
 							</span>
 						</div>
 						<a className="icon-button" href={`/events/${event.slug}`} aria-label={`View ${event.title}`} target="_blank" rel="noreferrer">

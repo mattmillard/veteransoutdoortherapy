@@ -204,6 +204,8 @@ export async function saveEventAction(form: FormData) {
 				template: form.get("template") === "fundraiser" ? "fundraiser" : "adventure",
 				published: form.get("published") === "on",
 				featured: form.get("featured") === "on",
+				over: form.get("over") === "on",
+				recapUrl: String(form.get("recapUrl") || "").trim() || undefined,
 				sortOrder: Number(form.get("sortOrder") || 0),
 			},
 			previousSlug,
@@ -233,6 +235,8 @@ export async function duplicateEventAction(form: FormData) {
 			title: `${source.title} (Copy)`,
 			published: false,
 			featured: false,
+			over: false,
+			recapUrl: undefined,
 			sortOrder: eventList.length + 1,
 		});
 	} catch {
