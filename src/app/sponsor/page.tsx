@@ -1,8 +1,9 @@
-import { ArrowRight, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { JsonLd } from "@/components/json-ld";
+import { SponsorOpportunities } from "@/components/sponsor-opportunities";
 import { getProducts } from "@/lib/db";
 import { breadcrumbSchema, faqSchema, pageMetadata } from "@/lib/site";
 import { sponsorLogos } from "@/lib/sponsors";
@@ -11,7 +12,6 @@ export const metadata = pageMetadata({
 	description: "Fund travel, lodging, meals, gear, guides, and field access for Veteran and Gold Star family outdoor experiences through a nonprofit sponsorship.",
 	path: "/sponsorships",
 });
-const uploads = "https://veteransoutdoortherapy.org/wp-content/uploads";
 const tierDetails: Record<string, { tagline: string; benefits: string[] }> = {
 	"bronze-sponsor": {
 		tagline: "Help Make A Difference",
@@ -57,20 +57,6 @@ const customTier = {
 		"Personal planning with our team",
 	],
 };
-const sponsorEvents = [
-	{
-		title: "Gold Star Peak Hike",
-		date: "2027",
-		image: `${uploads}/2025/09/510943338_122138281850799810_4751360453603558598_n-980x575.jpg`,
-		copy: "Embark on a scenic hike to Gold Star Peak. A great opportunity for Veterans to connect and unwind.",
-	},
-	{
-		title: "Antelope Hunt Adventure",
-		date: "September 2026",
-		image: `${uploads}/2025/09/552626211_122157952436799810_562294068412297872_n-980x735.jpg`,
-		copy: "Help make a fully supported archery antelope hunt possible in South Dakota.",
-	},
-];
 const sponsorFaqs = [
 	{
 		question: "What does a nonprofit sponsorship fund?",
@@ -170,23 +156,12 @@ export default async function SponsorPage() {
 			</section>
 			<section className="section sponsor-events-section">
 				<div className="container">
-					<p className="eyebrow">Upcoming sponsorship events</p>
-					<h2 className="display section-title">Put support behind an experience.</h2>
-					<div className="sponsor-events">
-						{sponsorEvents.map((event) => (
-							<article key={event.title}>
-								<div className="sponsor-event-image">
-									<Image src={event.image} alt={`${event.title} sponsorship opportunity`} fill sizes="(max-width: 800px) 100vw, 33vw" />
-								</div>
-								<span>{event.date}</span>
-								<h3 className="display">{event.title}</h3>
-								<p>{event.copy}</p>
-								<Link className="text-link" href="/contact">
-									Sponsor this event <ArrowRight size={17} />
-								</Link>
-							</article>
-						))}
-					</div>
+					<p className="eyebrow">Annual sponsorship opportunities</p>
+					<h2 className="display section-title">There is always a mission to fund.</h2>
+					<p className="prose sponsor-events-intro">
+						Our core experiences return each year, with new opportunities added as hosts and funding allow. Sponsor the next cycle of a cause that fits your organization.
+					</p>
+					<SponsorOpportunities />
 				</div>
 			</section>
 			<section className="section faq-section">

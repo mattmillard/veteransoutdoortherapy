@@ -1445,6 +1445,10 @@ img {
 .sponsor-events-section {
 	background: #e4e6df;
 }
+.sponsor-events-intro {
+	max-width: 760px;
+	margin: -12px 0 34px;
+}
 .sponsor-events {
 	display: grid;
 	grid-template-columns: repeat(3, 1fr);
